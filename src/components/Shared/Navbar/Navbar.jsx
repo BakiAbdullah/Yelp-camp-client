@@ -1,8 +1,9 @@
 import { useAuth } from "../../../hooks/useAuth";
 import Avatar from "./Avatar";
 import NavBottom from "./NavBottom";
-import { FaCampground } from "react-icons/fa";
 import './Navbar.css'
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const {user} = useAuth();
@@ -10,11 +11,7 @@ const Navbar = () => {
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
         <div className="container  mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
-          <div className="mr-[20px] flex items-center justify-center gap-2">
-            <FaCampground size={48} className="text-darkAmber"></FaCampground>
-            <span className="font-extrabold text-3xl">Yelp Camp</span>
-          </div>
-
+          <Logo></Logo>
           <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-slate-50 rounded-md hidden xl:flex items-center justify-center">
             <div className="relative parent">
               <a
@@ -115,9 +112,11 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
-                Sign In
-              </button>
+              <Link to='/login'>
+                <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
+                  Sign In
+                </button>
+              </Link>
             )}
           </nav>
         </div>
