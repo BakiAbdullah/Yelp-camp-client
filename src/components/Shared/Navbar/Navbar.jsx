@@ -2,7 +2,7 @@
 const Navbar = () => {
   return (
     <div>
-      <h2>Navbar</h2>
+      <h2>Summer Camp Navbar</h2>
     </div>
   );
 };
