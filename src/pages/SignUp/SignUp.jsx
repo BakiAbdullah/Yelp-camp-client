@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/Shared/Navbar/Logo";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -6,56 +6,63 @@ import toast from "react-hot-toast";
 import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
+import PopupLogin from "../../components/PopUpLogin/PopupLogin";
 
 const SignUp = () => {
-  const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
+  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
   };
 
-   const {
-     register,
-     handleSubmit,
-     formState: { errors },
-   } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-   const onSubmit = (data) => {
-     // Handle sign in
-     console.log(data);
-     signIn(data.email, data.password)
-       .then((result) => {
-         toast.success("Login Succes!");
-         console.log(result.user);
-         navigate(from, { replace: true });
-       })
-       .catch((err) => {
-         setLoading(false);
-         console.log(err.message);
-         toast.error(err.message);
-       });
-   };
-
-   // Handle Google Sign In
-   const handleGoogleSignIn = () => {
-     signInWithGoogle()
-       .then((result) => {
-         toast.success("Login Successfully!");
-         console.log(result);
-         // TODO: save user to db by using custom hook fetch
-
-         navigate(from, { replace: true });
-       })
-       .catch((err) => {
-         console.log(err.message);
-         toast.error(err.message);
-         setLoading(false);
-       });
-   };
+  const onSubmit = (data) => {
+    // Data from AuthProvider / User
+    createUser(data.email, data.name, data.photoURL, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        toast.success("User Created Successfully!");
+        // updateUserProfile(data.name, data.photoURL)
+        //   .then(() => {
+        //     const savedUser = {
+        //       name: data.name,
+        //       email: data.email,
+        //       photoURL: data.photoURL,
+        //     };
+        //     fetch("https://bistro-boss-server-lovat.vercel.app/users", {
+        //       method: "POST",
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify(savedUser),
+        //     })
+        //       .then((res) => res.json())
+        //       .then((data) => {
+        //         if (data.insertedId) {
+        //           // reset();
+        //         toast.success("User Created Successfully!");
+        //           navigate("/");
+        //         }
+        //       });
+        //   })
+        //   .catch((err) => {
+        //     toast.error("Something went wrong!!");
+        //     console.log(err);
+        //   });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <section className="min-h-screen relative mt-28 pb-20 flex items-stretch text-white ">
@@ -116,10 +123,7 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div
-        className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0"
-        style={{ backgroundColor: "#161616" }}
-      >
+      <div className="lg:w-1/2 w-full flex items-center bg-neutral-900 justify-center text-center md:px-16 px-0 z-0">
         <div className="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center">
           <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
         </div>
@@ -127,22 +131,24 @@ const SignUp = () => {
           <h1 className="my-6">
             <Logo></Logo>
           </h1>
-          <div className="py-6 space-x-4">
-            <span className="w-10 h-10 hover:bg-lightAmber items-center justify-center inline-flex rounded-full font-bold text-lg border-2 hover:border-darkAmber cursor-pointer duration-200 border-white">
-              f
-            </span>
-            <span
-              onClick={handleGoogleSignIn}
-              className="w-10 h-10 hover:bg-lightAmber  items-center justify-center inline-flex rounded-full font-bold text-lg border-2 hover:border-darkAmber cursor-pointer duration-200 border-white"
-            >
-              G+
-            </span>
-          </div>
+          <PopupLogin></PopupLogin>
           <p className="text-gray-100">or use email your account</p>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto"
           >
+            <div className="pb-2 pt-4">
+              <input
+                type="text"
+                {...register("name", { required: true })}
+                id="name"
+                placeholder="Name"
+                className="block caret-darkAmber w-full p-4 text-lg rounded-sm bg-black"
+              />
+              {errors.email && (
+                <span className="text-red-700">Email field is required</span>
+              )}
+            </div>
             <div className="pb-2 pt-4">
               <input
                 type="email"
@@ -165,7 +171,6 @@ const SignUp = () => {
                   pattern:
                     /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
                 })}
-                id="password"
                 placeholder="Password"
               />
               <FaEye
@@ -189,6 +194,53 @@ const SignUp = () => {
                 </p>
               )}
             </div>
+            {/* Confirm Password */}
+            <div className="pb-2 pt-4 relative">
+              <input
+                className="block w-full caret-darkAmber p-4 text-lg rounded-sm bg-black"
+                type={show ? "text" : "password"}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  pattern:
+                    /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
+                })}
+                placeholder="Confirm Password"
+              />
+              <FaEye
+                onClick={handleShow}
+                className="absolute hover:text-darkAmber duration-200 cursor-pointer right-3 top-10"
+              ></FaEye>
+
+              {/* Password Validation with RegEx */}
+              {errors.password?.type === "required" && (
+                <p className="text-red-700">Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-700">
+                  Password must be 6 characters or long
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-700 py-3">
+                  Password must have one uppercase, one lower case, one number &
+                  Special Character
+                </p>
+              )}
+            </div>
+            {/* PhotoURL */}
+            <div className="pb-2 pt-4">
+              <input
+                type="url"
+                {...register("photoURL", { required: true })}
+                placeholder="Photo URL"
+                className="block caret-darkAmber w-full p-4 text-lg rounded-sm bg-black"
+              />
+              {errors.name && (
+                <span className="text-red-700">Photo Url is required</span>
+              )}
+            </div>
+
             <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
               <a href="#">Forgot your password?</a>
             </div>

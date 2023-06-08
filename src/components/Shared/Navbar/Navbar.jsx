@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
-        <div className="container  mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
+        <div className="container mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
           <Logo></Logo>
           <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-slate-50 rounded-md hidden xl:flex items-center justify-center">
             <div className="relative parent">
@@ -102,18 +102,24 @@ const Navbar = () => {
             {user ? (
               <>
                 <ul className="ml-auto xl:w-48 flex items-center justify-end">
-                  <Avatar></Avatar>
-                  <div className="ml-4 hidden lg:flex flex-col font-bold">
+                  {/* <div className="ml-2 hidden lg:flex flex-col font-bold">
                     <span className="text-xs text-gray-400">
                       {user.displayName}
                     </span>
-                    <span>{user.email}</span>
-                  </div>
+                  </div> */}
+                  <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-lightAmber text-white duration-300 rounded-full font-bold px-6 py-2">
+                    Dashboard
+                    <span className="absolute -left-2 top-1 px-3">
+                      <Avatar></Avatar>
+                    </span>
+                  </button>
                 </ul>
-                <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-lightAmber text-white duration-300 rounded-full font-bold px-6 py-2">
-                  Dashboard
-                </button>
-                <div title="Logout" className="cursor-pointer shadow-md flex items-center justify-center rounded-full p-2 bg-white" onClick={logOut}>
+
+                <div
+                  title="Logout"
+                  className="cursor-pointer shadow-md flex items-center justify-center rounded-full p-2 bg-white"
+                  onClick={logOut}
+                >
                   <RiLogoutCircleRLine
                     className="text-lightAmber font-extrabold hover:animate-pulse duration-200"
                     size={24}
@@ -130,7 +136,7 @@ const Navbar = () => {
           </nav>
         </div>
 
-        <hr className="text-chocolate bg-chocolate h-[1px]" />
+        <hr className="text-gray bg-gray h-[1px]" />
         <NavBottom></NavBottom>
       </header>
     </div>
