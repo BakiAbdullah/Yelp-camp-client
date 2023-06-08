@@ -2,11 +2,12 @@ import { useAuth } from "../../../hooks/useAuth";
 import Avatar from "./Avatar";
 import NavBottom from "./NavBottom";
 import './Navbar.css'
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const Navbar = () => {
-  const {user} = useAuth();
+  const { user, logOut } = useAuth();
   return (
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
@@ -97,22 +98,30 @@ const Navbar = () => {
             </div>
           </div>
 
-          <nav className="flex space-x-5">
+          <nav className="flex items-center justify-center space-x-4">
             {user ? (
               <>
                 <ul className="ml-auto xl:w-48 flex items-center justify-end">
                   <Avatar></Avatar>
-                  <div className="ml-4 flex flex-col font-bold">
-                    <span className="text-xs text-gray-400">User Name</span>
-                    <span>Email</span>
+                  <div className="ml-4 hidden lg:flex flex-col font-bold">
+                    <span className="text-xs text-gray-400">
+                      {user.displayName}
+                    </span>
+                    <span>{user.email}</span>
                   </div>
                 </ul>
-                <button className="border border-gray shadow-sm  hover:shadow-inner rounded-full font-bold px-6 py-2">
+                <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-lightAmber text-white duration-300 rounded-full font-bold px-6 py-2">
                   Dashboard
                 </button>
+                <div title="Logout" className="cursor-pointer shadow-md flex items-center justify-center rounded-full p-2 bg-white" onClick={logOut}>
+                  <RiLogoutCircleRLine
+                    className="text-lightAmber font-extrabold hover:animate-pulse duration-200"
+                    size={24}
+                  ></RiLogoutCircleRLine>
+                </div>
               </>
             ) : (
-              <Link to='/login'>
+              <Link to="/login">
                 <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
                   Sign In
                 </button>
@@ -121,7 +130,7 @@ const Navbar = () => {
           </nav>
         </div>
 
-        <hr className="text-darkAmber bg-darkAmber h-[2px]" />
+        <hr className="text-chocolate bg-chocolate h-[1px]" />
         <NavBottom></NavBottom>
       </header>
     </div>

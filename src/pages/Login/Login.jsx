@@ -1,7 +1,64 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../components/Shared/Navbar/Logo";
+import { useAuth } from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { ImSpinner } from "react-icons/im";
+import { FaEye } from "react-icons/fa";
+import { useState } from "react";
+
 
 const Login = () => {
+  const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const [show, setShow] = useState(false);
+
+  const handleShow = ()=> {
+    setShow(!show)
+  }
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    // Handle sign in
+    console.log(data)
+    signIn(data.email, data.password)
+      .then((result) => {
+        toast.success('Login Succes!')
+        console.log(result.user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err.message);
+        toast.error(err.message);
+      });
+  };
+
+  // Handle Google Sign In
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        toast.success("Login Successfully!")
+        console.log(result);
+        // TODO: save user to db by using custom hook fetch
+      
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message);
+        setLoading(false);
+      });
+  };
+
   return (
     <section className="min-h-screen relative mt-28 pb-20 flex items-stretch text-white ">
       <svg
@@ -75,36 +132,77 @@ const Login = () => {
             <span className="w-10 h-10 hover:bg-lightAmber items-center justify-center inline-flex rounded-full font-bold text-lg border-2 hover:border-darkAmber cursor-pointer duration-200 border-white">
               f
             </span>
-            <span className="w-10 h-10 hover:bg-lightAmber  items-center justify-center inline-flex rounded-full font-bold text-lg border-2 hover:border-darkAmber cursor-pointer duration-200 border-white">
+            <span
+              onClick={handleGoogleSignIn}
+              className="w-10 h-10 hover:bg-lightAmber  items-center justify-center inline-flex rounded-full font-bold text-lg border-2 hover:border-darkAmber cursor-pointer duration-200 border-white"
+            >
               G+
             </span>
           </div>
           <p className="text-gray-100">or use email your account</p>
-          <form action="" className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto"
+          >
             <div className="pb-2 pt-4">
               <input
                 type="email"
-                name="email"
+                {...register("email", { required: true })}
                 id="email"
                 placeholder="Email"
-                className="block w-full p-4 text-lg rounded-sm bg-black"
+                className="block caret-darkAmber w-full p-4 text-lg rounded-sm bg-black"
               />
+              {errors.email && (
+                <span className="text-red-700">Email field is required</span>
+              )}
             </div>
-            <div className="pb-2 pt-4">
+            <div className="pb-2 pt-4 relative">
               <input
-                className="block w-full p-4 text-lg rounded-sm bg-black"
-                type="password"
-                name="password"
+                className="block w-full caret-darkAmber p-4 text-lg rounded-sm bg-black"
+                type={show ? "text" : "password"}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  pattern:
+                    /(?=.*\d)(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/,
+                })}
                 id="password"
                 placeholder="Password"
               />
+              <FaEye
+                onClick={handleShow}
+                className="absolute hover:text-darkAmber duration-200 cursor-pointer right-3 top-10"
+              ></FaEye>
+
+              {/* Password Validation with RegEx */}
+              {errors.password?.type === "required" && (
+                <p className="text-red-700">Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-700">
+                  Password must be 6 characters or long
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-700 py-3">
+                  Password must have one uppercase, one lower case, one number &
+                  Special Character
+                </p>
+              )}
             </div>
             <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
               <a href="#">Forgot your password?</a>
             </div>
             <div className="px-4 pb-2 pt-4">
-              <button className="uppercase block w-full p-4 text-lg font-semibold duration-200 rounded-full bg-lightAmber hover:bg-darkAmber focus:outline-none">
-                sign in
+              <button
+                type="submit"
+                className="uppercase cursor-pointer block w-full p-4 text-lg font-semibold duration-200 rounded-full bg-lightAmber hover:bg-darkAmber focus:outline-none"
+              >
+                {loading ? (
+                  <ImSpinner className="animate-spin m-auto" size={24} />
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </div>
 
