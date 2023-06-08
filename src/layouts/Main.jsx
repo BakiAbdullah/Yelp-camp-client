@@ -9,7 +9,6 @@ const Main = () => {
       <div className="min-h-[calc(100vh-98px)]">
         <Outlet />
       </div>
-      
       <Footer />
     </div>
   );

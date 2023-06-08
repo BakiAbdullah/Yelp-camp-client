@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 
 const PopupLogin = () => {
-  const { signInWithGoogle, loading, setLoading } = useAuth();
+  const { signInWithGoogle, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 

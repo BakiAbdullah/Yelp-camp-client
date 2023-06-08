@@ -111,7 +111,7 @@ const Login = () => {
         </div>
         <div className="w-full py-6 z-20">
           <h1 className="my-6">
-            <Logo></Logo>
+            <Logo center={true}></Logo>
           </h1>
           <PopupLogin></PopupLogin>
           <p className="text-gray-100">or use email your account</p>

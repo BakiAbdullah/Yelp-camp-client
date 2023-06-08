@@ -9,8 +9,8 @@ import { useState } from "react";
 import PopupLogin from "../../components/PopUpLogin/PopupLogin";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
-  const navigate = useNavigate();
+  const { createUser, loading, setLoading } = useAuth();
+  // const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -30,34 +30,7 @@ const SignUp = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
-        toast.success("User Created Successfully!");
-        // updateUserProfile(data.name, data.photoURL)
-        //   .then(() => {
-        //     const savedUser = {
-        //       name: data.name,
-        //       email: data.email,
-        //       photoURL: data.photoURL,
-        //     };
-        //     fetch("https://bistro-boss-server-lovat.vercel.app/users", {
-        //       method: "POST",
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body: JSON.stringify(savedUser),
-        //     })
-        //       .then((res) => res.json())
-        //       .then((data) => {
-        //         if (data.insertedId) {
-        //           // reset();
-        //         toast.success("User Created Successfully!");
-        //           navigate("/");
-        //         }
-        //       });
-        //   })
-        //   .catch((err) => {
-        //     toast.error("Something went wrong!!");
-        //     console.log(err);
-        //   });
+        toast.success("User Created Successfully!")
       })
       .catch((err) => {
         console.log(err);
@@ -129,7 +102,7 @@ const SignUp = () => {
         </div>
         <div className="w-full py-6 z-20">
           <h1 className="my-6">
-            <Logo></Logo>
+            <Logo center={true}></Logo>
           </h1>
           <PopupLogin></PopupLogin>
           <p className="text-gray-100">or use email your account</p>

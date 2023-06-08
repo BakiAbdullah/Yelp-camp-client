@@ -5,6 +5,7 @@ import './Navbar.css'
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import Button from "../../Button/Button";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,9 +13,9 @@ const Navbar = () => {
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
         <div className="container mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
-          <Logo></Logo>
+          <Logo center={true}></Logo>
           <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-slate-50 rounded-md hidden xl:flex items-center justify-center">
-            <div className="relative parent">
+            <div className="relative parent z-50">
               <a
                 href="#"
                 className="flex justify-between md:inline-flex p-4 items-center hover:bg-gray-50 space-x-2"
@@ -34,41 +35,49 @@ const Navbar = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex px-4 py-3 hover:bg-lightAmber duration-500"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
                   >
-                    Web development
+                    Art Education
                   </a>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex px-4 py-3 hover:bg-lightAmber duration-500"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
                   >
-                    Web Design
+                    General Fine Arts
                   </a>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex px-4 py-3 hover:bg-lightAmber duration-500"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
                   >
-                    Machine Learning
+                    Clay Studio
                   </a>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex px-4 py-3 hover:bg-lightAmber duration-500"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
                   >
-                    Machine Learning
+                    Wood Arts
                   </a>
                 </li>
                 <li>
                   <a
                     href="#"
-                    className="flex px-4 py-3 hover:bg-lightAmber duration-500"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
                   >
-                    Machine Learning
+                    Glass Studio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="flex px-4 py-3 hover:bg-chocolate duration-500"
+                  >
+                    Painting Studio
                   </a>
                 </li>
               </ul>
@@ -107,7 +116,7 @@ const Navbar = () => {
                       {user.displayName}
                     </span>
                   </div> */}
-                  <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-lightAmber text-white duration-300 rounded-full font-bold px-6 py-2">
+                  <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
                     Dashboard
                     <span className="absolute -left-2 top-1 px-3">
                       <Avatar></Avatar>
@@ -128,9 +137,7 @@ const Navbar = () => {
               </>
             ) : (
               <Link to="/login">
-                <button className="hover:bg-white hover:text-darkGray shadow-sm ml-auto bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
-                  Sign In
-                </button>
+                <Button label={"Sign In"} hover={true}></Button>
               </Link>
             )}
           </nav>

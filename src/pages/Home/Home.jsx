@@ -1,11 +1,13 @@
 import WrapperContainer from "../../components/Shared/Container/WrapperContainer";
+import Banner from "./Banner/Banner";
+import RegisterOrientation from "./RegisterOrientation/RegisterOrientation";
 
 const Home = () => {
   return (
     <div>
-      <WrapperContainer>
-        <h2 className="text-seagreen font-bold text-3xl">Render Home Here</h2>
-      </WrapperContainer>
+      <Banner></Banner>
+      <RegisterOrientation></RegisterOrientation>
+      <WrapperContainer></WrapperContainer>
     </div>
   );
 };

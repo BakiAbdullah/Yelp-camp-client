@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -7,13 +8,14 @@ export default {
         gray: "#F6F1E9",
         lightGray: "#B0A4A4",
         darkGray: "#454545",
-        creamYellow: "#F1C376",
+        creamYellow: "#E8AA42",
         darkAmber: "#FF8400",
-        lightAmber: "#F97B22",
-        chocolate: "#4F200D",
+        lightAmber: "#E57C23",
+        chocolate: "#884A39",
       },
       fontFamily: {
-        Montserrat: ["Montserrat", "sans-serif"],
+        gasoek: ["Gasoek One", "sans-serif"],
+        archivo: ["Archivo Black", "sans-serif"],
       },
     },
   },
