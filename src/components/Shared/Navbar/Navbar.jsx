@@ -6,7 +6,6 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "../../Button/Button";
-
 const Navbar = () => {
   const { user, logOut } = useAuth();
   return (
@@ -15,7 +14,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
           <Logo center={true}></Logo>
           <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-slate-50 rounded-md hidden xl:flex items-center justify-center">
-            <div className="relative parent">
+            <div className="relative parent z-50">
               <a
                 href="#"
                 className="flex justify-between md:inline-flex p-4 items-center hover:bg-gray-50 space-x-2"

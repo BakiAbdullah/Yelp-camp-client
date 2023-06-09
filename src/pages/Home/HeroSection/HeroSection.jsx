@@ -1,5 +1,6 @@
-import Button from '../../../components/Button/Button';
-import banner from '/baner11.jpg'
+import { Typewriter } from "react-simple-typewriter";
+import Button from "../../../components/Button/Button";
+import banner from "/baner11.jpg";
 import { RiDoubleQuotesL } from "react-icons/ri";
 
 const HeroSection = () => {
@@ -27,7 +28,18 @@ const HeroSection = () => {
               Welcome
             </p>
             <h2 className="mb-5 font-archivo text-darkGray text-3xl font-bold tracking-tight text-gray-900 md:text-5xl sm:leading-none">
-              Resurrecting time tested skills.
+              <Typewriter
+                words={[
+                  "Resurrecting time Codtestede skills.",
+                  "A unique facet of the School of Art & Craft",
+                ]}
+                loop={10}
+                cursor
+                cursorStyle="_"
+                typeSpeed={60}
+                deleteSpeed={40}
+                delaySpeed={1000}
+              ></Typewriter>
             </h2>
             <div className="flex items-center gap-4  py-5">
               <RiDoubleQuotesL

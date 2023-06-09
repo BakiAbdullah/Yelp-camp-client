@@ -1,4 +1,4 @@
-
+import {  Fade } from "react-awesome-reveal";
 
 const PopularInstructorsCard = ({ singleInstructor }) => {
   const {
@@ -10,14 +10,15 @@ const PopularInstructorsCard = ({ singleInstructor }) => {
   } = singleInstructor;
   return (
     <>
-      <div className="">
-        <div className="max-w-3xl flex justify-center items-center h-full m-4">
-          <div className="relative bg-chocolate group md:w-5/12 w-3/4 h-[300px] transition-all duration-300">
+      <Fade duration={2000}>
+        <div className="max-w-3xl flex justify-center items-center h-full m-4 ">
+          <div className="relative bg-chocolate bg-[url('/blob.svg')] group md:w-5/12 w-3/4 h-[300px] transition-all duration-300">
             <div className="flex flex-col">
-              <h1 className="pl-4 md:pl-8 mt-6 md:mt-8 text-xl md:text-2xl font-archivo text-pink transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
+              <h1 className="pl-4 md:pl-8 mt-6 md:mt-8 text-xl md:text-2xl font-archivo text-lightAmber transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
                 <span>
                   {instructor_name}: <br />
                 </span>
+
                 <span className="text-sm font-sans">
                   Class Taken: {number_of_classes_taken}
                 </span>
@@ -37,7 +38,7 @@ const PopularInstructorsCard = ({ singleInstructor }) => {
             <img src={instructor_img} className="h-[300px] object-cover" />
           </div>
         </div>
-      </div>
+      </Fade>
     </>
   );
 };

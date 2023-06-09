@@ -1,4 +1,4 @@
-
+import { Fade } from "react-awesome-reveal";
 
 const PopularClassCard = ({ singleClass }) => {
   const { image, class_name, class_details, instructor_name } = singleClass;
@@ -6,18 +6,22 @@ const PopularClassCard = ({ singleClass }) => {
     <div>
       <div className="mx-auto px-4 py-8 max-w-xl">
         <div className="bg-white shadow-2xl mb-6 rounded-bl-3xl tracking-wide cursor-pointer">
-          <div className="overflow-hidden bg-pink rounded-bl-3xl">
-            <img
-              src={image}
-              alt="mountains"
-              className="w-full h-full object-cover hover:scale-110 transition duration-500   rounded-bl-full"
-            />
-          </div>
+          <Fade cascade damping={0.5} duration={2000}>
+            <div className="overflow-hidden bg-pink ">
+              <img
+                src={image}
+                alt="mountains"
+                className="w-full h-full object-cover hover:scale-110 transition duration-500   rounded-bl-full"
+              />
+            </div>
+          </Fade>
           <div className="px-4 py-2 mt-2">
             <h2 className="font-bold text-2xl text-gray-800 tracking-normal">
               {class_name}
             </h2>
-            <p className="text-sm text-gray-700  my-2">{class_details}</p>
+            <p className="text-sm text-gray-700  my-2">
+              {class_details.slice(0, 62)}...
+            </p>
             <div className="flex items-center justify-between mt-2 mx-6">
               <a href="#" className="text-darkAmber text-xs -ml-6 ">
                 Show More
