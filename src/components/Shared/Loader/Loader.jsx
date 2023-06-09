@@ -1,4 +1,4 @@
-import { BarLoader } from "react-spinners";
+import { RiseLoader } from "react-spinners";
 
 
 const Loader = () => {
@@ -12,7 +12,7 @@ const Loader = () => {
       items-center 
     "
     >
-      <BarLoader size={100} color="orange" />
+      <RiseLoader size={12} color="orange" />
     </div>
   );
 };

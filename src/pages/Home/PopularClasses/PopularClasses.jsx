@@ -12,11 +12,11 @@ const PopularClasses = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL}/allclasses`)
+    fetch(`${import.meta.env.VITE_API_URL}/allclasses?limit=7`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setClasses(data.slice(0,6));
+        setClasses(data);
         setLoading(false);
       });
   }, []);
@@ -29,7 +29,7 @@ const PopularClasses = () => {
     <div>
       <MainHeading
         title={"Popular Classes"}
-        subtitle={"instructors top 6 classes"}
+        subtitle={"instructors top classes"}
       ></MainHeading>
       <WrapperContainer>
         <div className="grid grid-cols-1 lg:grid-cols-3">
