@@ -12,7 +12,7 @@ const PopularClasses = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL}/allclasses?limit=7`)
+    fetch(`${import.meta.env.VITE_API_URL}/allclasses?limit=6`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

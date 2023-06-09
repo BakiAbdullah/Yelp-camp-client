@@ -1,3 +1,10 @@
 .awssld__bullets {
   display: none !important;
 }
+
+.awssld__controls__arrow-left::after {
+  background-color: darkorange
+}
+.awssld__controls__arrow-right::after {
+  background-color: darkorange
+}

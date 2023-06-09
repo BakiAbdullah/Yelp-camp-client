@@ -5,12 +5,12 @@ const PopularClassCard = ({ singleClass }) => {
   return (
     <div>
       <div className="mx-auto px-4 py-8 max-w-xl">
-        <div className="bg-white shadow-2xl mb-6 tracking-wide">
-          <div className="md:flex-shrink-0 bg-pink rounded-bl-3xl">
+        <div className="bg-white shadow-2xl mb-6 rounded-bl-3xl tracking-wide cursor-pointer">
+          <div className="overflow-hidden bg-pink rounded-bl-3xl">
             <img
               src={image}
               alt="mountains"
-              className="w-full h-64 rounded-bl-full"
+              className="w-full h-full object-cover hover:scale-110 transition duration-500   rounded-bl-full"
             />
           </div>
           <div className="px-4 py-2 mt-2">
@@ -19,14 +19,14 @@ const PopularClassCard = ({ singleClass }) => {
             </h2>
             <p className="text-sm text-gray-700  my-2">{class_details}</p>
             <div className="flex items-center justify-between mt-2 mx-6">
-              <a href="#" className="text-blue-500 text-xs -ml-6 ">
+              <a href="#" className="text-darkAmber text-xs -ml-6 ">
                 Show More
               </a>
               <a href="#" className="flex text-gray-700">
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"
-                  className="w-6 h-6 text-blue-500"
+                  className="w-6 h-6 text-darkAmber"
                   stroke="currentColor"
                 >
                   <path
