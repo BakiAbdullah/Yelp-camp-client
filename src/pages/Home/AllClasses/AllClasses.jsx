@@ -1,6 +1,6 @@
 
-
 const AllClasses = () => {
+  
   return (
     <div>
       Classes Page

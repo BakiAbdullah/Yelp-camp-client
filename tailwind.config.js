@@ -7,6 +7,7 @@ export default {
       colors: {
         gray: "#F6F1E9",
         lightGray: "#B0A4A4",
+        pink: "#FFF4F4",
         darkGray: "#454545",
         creamYellow: "#E8AA42",
         darkAmber: "#FF8400",

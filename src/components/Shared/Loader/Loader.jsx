@@ -12,7 +12,7 @@ const Loader = () => {
       items-center 
     "
     >
-      <BarLoader size={100} color="red" />
+      <BarLoader size={100} color="orange" />
     </div>
   );
 };
