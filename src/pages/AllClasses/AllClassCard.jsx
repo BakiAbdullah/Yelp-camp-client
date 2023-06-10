@@ -1,6 +1,8 @@
 import { Fade } from "react-awesome-reveal";
+import Button from "../../components/Button/Button";
 
-const PopularClassCard = ({ singleClass }) => {
+
+const AllClassCard = ({ singleClass }) => {
   const { image, class_name, class_details, instructor_name } = singleClass;
   return (
     <div>
@@ -11,7 +13,7 @@ const PopularClassCard = ({ singleClass }) => {
               <img
                 src={image}
                 alt="mountains"
-                className="w-full h-full object-cover hover:scale-110 transition duration-500   rounded-bl-full"
+                className="w-full lg:h-[300px] object-cover hover:scale-110 transition duration-500 rounded-bl-full"
               />
             </div>
           </Fade>
@@ -22,10 +24,8 @@ const PopularClassCard = ({ singleClass }) => {
             <p className="text-sm text-gray-700 my-2">
               {class_details.slice(0, 50)}...
             </p>
-            <div className="flex items-center justify-between mt-2 mx-6">
-              <a href="#" className="text-darkAmber text-xs -ml-6 ">
-                Show More
-              </a>
+            <div className="flex items-center justify-between my-4 ">
+              <Button label={'Select'} hover={true}></Button>
               <a href="#" className="flex text-gray-700">
                 <svg
                   fill="none"
@@ -62,4 +62,4 @@ const PopularClassCard = ({ singleClass }) => {
   );
 };
 
-export default PopularClassCard;
+export default AllClassCard;

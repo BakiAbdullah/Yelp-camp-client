@@ -1,8 +1,31 @@
-import Button from "../../components/Button/Button";
+
+import { useQuery } from "@tanstack/react-query";
 import CoverParallax from "../../components/Shared/CoverParallax/CoverParallax";
+import Loader from "../../components/Shared/Loader/Loader";
+import InstructorsRow from "./InstructorsRow";
 import img from "/baner14.jpg";
 
 const Instructors = () => {
+  // Tanstack Query Implementation
+  const {
+    data: instructors = [],
+    isLoading: loading,
+  
+  } = useQuery({
+    queryKey: ["instructors"],
+    // enabled: !loading,
+    queryFn: async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/instructors`
+      );
+      return res.json();
+    },
+  });
+
+  if (loading) {
+    return <Loader></Loader>;
+  }
+
   return (
     <div>
       <CoverParallax img={img} title={"All Instructors"}></CoverParallax>
@@ -10,12 +33,14 @@ const Instructors = () => {
       <div className="container mx-auto px-4 mt-12 sm:px-8">
         <div className="py-8">
           <div>
-            <h2 className="text-2xl font-semibold leading-tight">Instructors</h2>
+            <h2 className="text-2xl font-semibold leading-tight">
+              Instructors
+            </h2>
           </div>
           <div className="my-2 flex sm:flex-row flex-col">
             <div className="flex flex-row mb-1 sm:mb-0">
               <div className="relative">
-                <select className="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <select className="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                   <option>5</option>
                   <option>10</option>
                   <option>20</option>
@@ -31,7 +56,7 @@ const Instructors = () => {
                 </div>
               </div>
               <div className="relative">
-                <select className="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b  block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                <select className="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b  block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
                   <option>All</option>
                   <option>Active</option>
                   <option>Inactive</option>
@@ -83,45 +108,12 @@ const Instructors = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-3">
-                          <p className="text-gray-900 whitespace-no-wrap">
-                            Dana Moore
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Olivia</p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        olivia@gmail.com
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    5
-                      {/* <span className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">4</span>
-                      </span> */}
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <Button label={"See Classes"} hover={true}></Button>
-                    </td>
-                  </tr>
+                  {instructors.map((instructor) => (
+                    <InstructorsRow
+                      key={instructor._id}
+                      instructor={instructor}
+                    ></InstructorsRow>
+                  ))}
                 </tbody>
               </table>
               <div className="px-5 py-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between          ">

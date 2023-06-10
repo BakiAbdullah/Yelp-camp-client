@@ -1,15 +1,18 @@
 
+import { useQuery } from "@tanstack/react-query";
 import MainHeading from "../../../components/MainHeading/MainHeading";
 import WrapperContainer from "../../../components/Shared/Container/WrapperContainer";
 import Loader from "../../../components/Shared/Loader/Loader";
 import PopularInstructorsCard from "./PopularInstructorsCard";
-import { useQuery } from "@tanstack/react-query";
 
 
 const PopularInstructors = () => {
-
   // Tanstack Query Implementation
-  const { data: instructors = [], isLoading: loading } = useQuery({
+  const {
+    data: instructors = [],
+    isLoading: loading,
+
+  } = useQuery({
     queryKey: ["instructors"],
     // enabled: !loading,
     queryFn: async () => {
@@ -23,7 +26,7 @@ const PopularInstructors = () => {
   if (loading) {
     return <Loader></Loader>;
   }
-  
+
   return (
     <div>
       <MainHeading

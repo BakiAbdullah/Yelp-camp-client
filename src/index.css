@@ -12,6 +12,19 @@
   }
 }
 
+
+ /* Only the scroll bar */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(103, 51, 2, 0.313);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(240, 131, 6, 0.351);
+} 
+
 /* .link {
   @apply hover:text-pink font-semibold no-underline bg-transparent hover:bg-transparent hover:border-b-2 border-pink transition-colors duration-300;
 } */

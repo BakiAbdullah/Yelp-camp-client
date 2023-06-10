@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../../components/Shared/Navbar/Logo";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { ImSpinner } from "react-icons/im";
 import { FaEye } from "react-icons/fa";
 import { useState } from "react";
 import PopupLogin from "../../components/PopUpLogin/PopupLogin";
+import { saveUser } from "../../hooks/useUserInfo";
 
 const SignUp = () => {
   const { createUser, loading, setLoading } = useAuth();
@@ -20,17 +21,18 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    reset,
+
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     // Data from AuthProvider / User
-    createUser(data.email, data.name, data.photoURL, data.password)
+    createUser(data?.email, data?.name, data?.photoURL, data?.password)
       .then((result) => {
-        const loggedUser = result.user;
+        const loggedUser = result?.user;
         console.log(loggedUser);
-        toast.success("User Created Successfully!")
+        saveUser(result?.user);
+        toast.success("User Created Successfully!");
       })
       .catch((err) => {
         console.log(err);

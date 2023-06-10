@@ -18,20 +18,20 @@ const Banner = () => {
         >
           <div
             className="relative"
-            data-src="../../../../public/instructor.webp"
+            data-src="/public/baner13.jpg"
           >
             <div className="w-2/3 mx-auto text-center">
-              <Slide direction="down" cascade damping={0.3} duration={1000}>
+              <Slide direction="left" cascade damping={0.3} duration={1000}>
                 <h2 className="lg:text-7xl md:text-6xl text-2xl font-archivo text-white">
                   Unlock Your Artistic Potential with Expert Instructors
                 </h2>
               </Slide>
-              <Slide direction="up" cascade damping={0.3} duration={1000}>
+              <Slide direction="right" cascade damping={0.3} duration={1000}>
                 <p className="lg:text-3xl text-xs my-5 font-archivo text-white">
                   Experience the Joy of Art & Craft!
                 </p>
               </Slide>
-              <Slide direction="up" cascade damping={0.3} duration={1000}>
+              <Slide direction="right" cascade damping={0.3} duration={1000}>
                 <Button
                   label="Enroll Now"
                   hover={true}

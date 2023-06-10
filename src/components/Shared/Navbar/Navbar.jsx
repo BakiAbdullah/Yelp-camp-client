@@ -115,12 +115,14 @@ const Navbar = () => {
                       {user.displayName}
                     </span>
                   </div> */}
-                  <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
-                    Dashboard
-                    <span className="absolute -left-2 top-1 px-3">
-                      <Avatar></Avatar>
-                    </span>
-                  </button>
+                  <Link to='/dashboard'>
+                    <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
+                      Dashboard
+                      <span title={`${user ? user?.displayName : 'Not Found'}`} className="absolute -left-2 top-1 px-3">
+                        <Avatar></Avatar>
+                      </span>
+                    </button>
+                  </Link>
                 </ul>
 
                 <div

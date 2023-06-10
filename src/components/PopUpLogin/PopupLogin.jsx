@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
+import { saveUser } from "../../hooks/useUserInfo";
 
 const PopupLogin = () => {
   const { signInWithGoogle, setLoading } = useAuth();
@@ -15,7 +16,7 @@ const PopupLogin = () => {
         toast.success("Login Successfully!");
         console.log(result);
         // TODO: save user to db by using custom hook fetch
-
+        saveUser(result.user);
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -24,7 +25,6 @@ const PopupLogin = () => {
         setLoading(false);
       });
   };
-
 
   return (
     <div>
