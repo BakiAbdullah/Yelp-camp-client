@@ -3,7 +3,7 @@ import withAutoplay from "react-awesome-slider/dist/autoplay";
 import "react-awesome-slider/dist/styles.css";
 import './Banner.css'
 import Button from "../../../components/Button/Button";
-import { Zoom } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 
@@ -21,16 +21,19 @@ const Banner = () => {
             data-src="../../../../public/instructor.webp"
           >
             <div className="w-2/3 mx-auto text-center">
-              <Zoom cascade damping={0.3} duration={1000}>
+              <Slide direction="down" cascade damping={0.3} duration={1000}>
                 <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
                   Unlock Your Artistic Potential with Expert Instructors
                 </h2>
-              </Zoom>
-              <p className="lg:text-3xl my-5 font-archivo text-white">
-                Experience the Joy of Art & Craft!
-              </p>
-
-              <Button label="Enroll Now" hover={true} fontbig={true}></Button>
+              </Slide>
+              <Slide direction="up" cascade damping={0.3} duration={1000}>
+                <p className="lg:text-3xl my-5 font-archivo text-white">
+                  Experience the Joy of Art & Craft!
+                </p>
+              </Slide>
+              <Slide direction="up" cascade damping={0.3} duration={1000}>
+                <Button label="Enroll Now" hover={true} fontbig={true}></Button>
+              </Slide>
             </div>
           </div>
           <div
@@ -38,31 +41,35 @@ const Banner = () => {
             data-src="../../../../public/ART_Studio.jpg"
           >
             <div className="w-2/3 mx-auto text-center">
-              <Zoom cascade damping={0.3} duration={1000}>
+              <Slide cascade damping={0.3} duration={1200} direction="left">
                 <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
                   Enroll Now for a Summer of Art & Craft Fun!
                 </h2>
-              </Zoom>
+              </Slide>
 
-              <p className="lg:text-3xl my-5 font-archivo text-white">
-                Where Imagination Takes Flight!
-              </p>
+              <Slide cascade damping={0.3} duration={1200} direction="right">
+                <p className="lg:text-3xl my-5 font-archivo text-white">
+                  Where Imagination Takes Flight!
+                </p>
+              </Slide>
 
               <Button label="Enroll Now" hover={true} fontbig={true}></Button>
             </div>
           </div>
           <div className="relative" data-src="../../../../public/potery3.jpg">
             <div className="w-2/3 mx-auto text-center">
-              <Zoom cascade damping={0.3} duration={1000}>
+              <Slide cascade damping={0.3} duration={1200} direction="left">
                 {" "}
                 <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
                   Join Us for an Exciting Journey of Art & Craft
                 </h2>
-              </Zoom>
+              </Slide>
 
-              <p className="lg:text-3xl my-5 font-archivo text-white">
-                Where Imagination Takes Flight!
-              </p>
+              <Slide cascade damping={0.3} duration={1000} direction="right">
+                <p className="lg:text-3xl my-5 font-archivo text-white">
+                  Where Imagination Takes Flight!
+                </p>
+              </Slide>
 
               <Button label="Enroll Now" hover={true} fontbig={true}></Button>
             </div>

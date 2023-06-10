@@ -10,8 +10,8 @@ const PopularInstructorsCard = ({ singleInstructor }) => {
   } = singleInstructor;
   return (
     <>
-      <Fade duration={2000}>
-        <div className="max-w-3xl flex justify-center items-center h-full m-4 ">
+      <Fade duration={2000} >
+        <div className="max-w-3xl flex justify-center items-center h-full">
           <div className="relative bg-chocolate bg-[url('/blob.svg')] group md:w-5/12 w-3/4 h-[300px] transition-all duration-300">
             <div className="flex flex-col">
               <h1 className="pl-4 md:pl-8 mt-6 md:mt-8 text-xl md:text-2xl font-archivo text-lightAmber transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
@@ -30,8 +30,8 @@ const PopularInstructorsCard = ({ singleInstructor }) => {
                 {brief_description.slice(0, 100)}...
               </p>
             </div>
-            <div className="absolute z-50 bottom-32 hidden md:bottom-10 right-0 transform translate-x-8 -translate-y-20 md:flex items-center justify-center w-16 h-16 rounded-full bg-chocolate group-hover:bg-darkAmber text-pink group-hover:text-white font-semibold cursor-pointer group-hover:scale-110 duration-300 select-none">
-              Get It!
+            <div className="absolute z-50 bottom-32 hidden md:bottom-10 right-0 transform translate-x-12 -translate-y-20 md:flex items-center justify-center w-24 h-24 rounded-full bg-chocolate group-hover:bg-darkAmber text-pink group-hover:text-white font-semibold cursor-pointer group-hover:scale-110 duration-300 select-none">
+              See Classes
             </div>
           </div>
           <div className="md:w-6/12 w-full">

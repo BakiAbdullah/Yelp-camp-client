@@ -5,8 +5,8 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 
 const HeroSection = () => {
   return (
-    <div>
-      <div className="relative flex flex-col-reverse mt-32 pb-24 lg:pt-0 lg:flex-col lg:pb-0">
+    <>
+      <div className="relative flex flex-col-reverse mt-32 pb-24 lg:pt-0 lg:flex-col lg:pb-0 ">
         <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
           <svg
             className="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block"
@@ -28,7 +28,8 @@ const HeroSection = () => {
               Welcome
             </p>
             <h2 className="mb-5 font-archivo text-darkGray text-3xl font-bold tracking-tight text-gray-900 md:text-5xl sm:leading-none">
-              <Typewriter
+              Resurrecting time tested skills.
+              {/* <Typewriter
                 words={[
                   "Resurrecting time Codtestede skills.",
                   "A unique facet of the School of Art & Craft",
@@ -39,7 +40,7 @@ const HeroSection = () => {
                 typeSpeed={60}
                 deleteSpeed={40}
                 delaySpeed={1000}
-              ></Typewriter>
+              ></Typewriter> */}
             </h2>
             <div className="flex items-center gap-4  py-5">
               <RiDoubleQuotesL
@@ -47,7 +48,19 @@ const HeroSection = () => {
                 size={55}
               ></RiDoubleQuotesL>
               <span className="italic text-darkGray font-serif w-2/4">
-                Traditionally Passed From One Generation to The Next.
+                <Typewriter
+                  words={[
+                    "Traditionally Passed From One Generation to The Next.",
+                    "A unique facet of the School of Art & Craft",
+                  ]}
+                  loop={true}
+                  cursor
+                  cursorStyle="_"
+                  typeSpeed={60}
+                  deleteSpeed={30}
+                  delaySpeed={1000}
+                ></Typewriter>
+                {/* Traditionally Passed From One Generation to The Next. */}
               </span>
             </div>
             <p className="pr-5 mb-5 text-lightGray text-gray-700 md:text-lg">
@@ -61,7 +74,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
