@@ -101,21 +101,22 @@ const Instructors = () => {
                       </div>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">Editor</p>
+                      <p className="text-gray-900 whitespace-no-wrap">Olivia</p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        Jan 10, 2020
+                        olivia@gmail.com
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <span className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                    5
+                      {/* <span className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
                         <span
                           aria-hidden
                           className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
                         ></span>
-                        <span className="relative">Suspended</span>
-                      </span>
+                        <span className="relative">4</span>
+                      </span> */}
                     </td>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <Button label={"See Classes"} hover={true}></Button>
