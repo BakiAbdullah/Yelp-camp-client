@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+
 import MainHeading from "../../../components/MainHeading/MainHeading";
 import WrapperContainer from "../../../components/Shared/Container/WrapperContainer";
 import Loader from "../../../components/Shared/Loader/Loader";
 import PopularInstructorsCard from "./PopularInstructorsCard";
+import { useQuery } from "@tanstack/react-query";
 
 
 const PopularInstructors = () => {
-   const [instructors, setInstructors] = useState([]);
-   const [loading, setLoading] = useState(false);
 
-   useEffect(() => {
-     setLoading(true);
-     fetch(`${import.meta.env.VITE_API_URL}/instructors?limit=6`)
-       .then((res) => res.json())
-       .then((data) => {
-         console.log(data);
-         setInstructors(data);
-         setLoading(false);
-       });
-   }, []);
+  // Tanstack Query Implementation
+  const { data: instructors = [], isLoading: loading } = useQuery({
+    queryKey: ["instructors"],
+    // enabled: !loading,
+    queryFn: async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/instructors?limit=6`
+      );
+      return res.json();
+    },
+  });
 
-   if (loading) {
-     return <Loader></Loader>;
-   }
+  if (loading) {
+    return <Loader></Loader>;
+  }
+  
   return (
     <div>
       <MainHeading

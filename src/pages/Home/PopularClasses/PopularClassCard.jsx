@@ -4,8 +4,8 @@ const PopularClassCard = ({ singleClass }) => {
   const { image, class_name, class_details, instructor_name } = singleClass;
   return (
     <div>
-      <div className="mx-auto px-4 py-8 max-w-xl">
-        <div className="bg-white shadow-2xl mb-6 rounded-bl-3xl tracking-wide cursor-pointer">
+      <div className="mx-auto px-4 max-w-xl">
+        <div className="bg-white shadow-2xl mb-8 rounded-bl-3xl tracking-wide cursor-pointer">
           <Fade cascade damping={0.5} duration={2000}>
             <div className="overflow-hidden bg-pink ">
               <img
@@ -19,8 +19,8 @@ const PopularClassCard = ({ singleClass }) => {
             <h2 className="font-bold text-2xl text-gray-800 tracking-normal">
               {class_name}
             </h2>
-            <p className="text-sm text-gray-700  my-2">
-              {class_details.slice(0, 62)}...
+            <p className="text-sm text-gray-700 my-2">
+              {class_details}
             </p>
             <div className="flex items-center justify-between mt-2 mx-6">
               <a href="#" className="text-darkAmber text-xs -ml-6 ">

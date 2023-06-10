@@ -1,28 +1,26 @@
-import { useState } from "react";
+
 import MainHeading from "../../../components/MainHeading/MainHeading";
-import { useEffect } from "react";
 import WrapperContainer from "../../../components/Shared/Container/WrapperContainer";
 import PopularClassCard from "./PopularClassCard";
 import Loader from "../../../components/Shared/Loader/Loader";
-
+import { useQuery } from "@tanstack/react-query";
 
 const PopularClasses = () => {
-  const [classes, setClasses] = useState([]);
-  const [loading, setLoading] = useState(false);
+  
+  // Tanstack Query Implementation
+  const { data: classes = [], isLoading: loading } = useQuery({
+    queryKey: ["allclasses"],
+    // enabled: !loading,
+    queryFn: async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/allclasses?limit=6`
+      );
+      return res.json();
+    },
+  });
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL}/allclasses?limit=6`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setClasses(data);
-        setLoading(false);
-      });
-  }, []);
-
-  if(loading) {
-    return <Loader></Loader>
+  if (loading) {
+    return <Loader></Loader>;
   }
 
   return (

@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
-        <div className="container mx-auto px-4 py-8 flex items-center lg:justify-around justify-between">
+        <div className="container mx-auto px-4 py-8 flex lg:flex-row flex-col items-center gap-5 lg:gap-0 lg:justify-around justify-between">
           <Logo center={true}></Logo>
           <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-slate-50 rounded-md hidden xl:flex items-center justify-center">
             <div className="relative parent z-50">
@@ -136,7 +136,7 @@ const Navbar = () => {
               </>
             ) : (
               <Link to="/login">
-                <Button label={"Sign In"} hover={true}></Button>
+                <Button label={"Sign In"} hover={true} fontbig={true}></Button>
               </Link>
             )}
           </nav>

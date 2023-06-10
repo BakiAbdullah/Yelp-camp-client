@@ -11,10 +11,9 @@ const Logo = ({ invert, center }) => {
         }`}
       >
         <FaCampground
-          size={48}
-          className={`${invert ? "text-white" : "text-darkAmber"}`}
+          className={`text-3xl lg:text-5xl ${invert ? "text-white" : "text-darkAmber"}`}
         ></FaCampground>
-        <span className="font-extrabold font-archivo text-4xl">Yelp Camp</span>
+        <span className="font-extrabold font-archivo text-xl lg:text-4xl">Yelp Camp</span>
       </Link>
     </div>
   );

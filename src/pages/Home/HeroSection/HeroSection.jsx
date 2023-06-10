@@ -6,8 +6,8 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 const HeroSection = () => {
   return (
     <>
-      <div className="relative flex flex-col-reverse mt-32 pb-24 lg:pt-0 lg:flex-col lg:pb-0 ">
-        <div className="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
+      <div className="relative flex flex-col-reverse mt-16 lg:mt-32 lg:mb-32 lg:pt-0 lg:flex-col pb-0">
+        <div className="inset-y-0 top-0 right-0 z-0 w-full lg:px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 max-w-full lg:absolute xl:px-0">
           <svg
             className="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block"
             viewBox="0 0 100 100"
@@ -17,7 +17,7 @@ const HeroSection = () => {
             <path d="M50 0H100L50 100H0L50 0Z" />
           </svg>
           <img
-            className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
+            className="object-cover hidden lg:block w-full h-64 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
             src={banner}
             alt=""
           />
@@ -27,7 +27,7 @@ const HeroSection = () => {
             <p className="inline-block italic font-serif py-px mb-4 text-lightAmber   ">
               Welcome
             </p>
-            <h2 className="mb-5 font-archivo text-darkGray text-3xl font-bold tracking-tight text-gray-900 md:text-5xl sm:leading-none">
+            <h2 className="mb-5 font-archivo text-darkGray text-4xl font-bold tracking-tight text-gray-900 md:text-5xl sm:leading-none">
               Resurrecting time tested skills.
               {/* <Typewriter
                 words={[
@@ -42,7 +42,7 @@ const HeroSection = () => {
                 delaySpeed={1000}
               ></Typewriter> */}
             </h2>
-            <div className="flex items-center gap-4  py-5">
+            <div className="flex items-center lg:gap-4 py-3 lg:py-5">
               <RiDoubleQuotesL
                 className="italic tranform rotate-3 text-lightAmber"
                 size={55}

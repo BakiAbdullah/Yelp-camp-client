@@ -10,7 +10,7 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 const Banner = () => {
   return (
     <>
-      <div className="min-h-screen">
+      <div className="">
         <AutoplaySlider
           play={true}
           cancelOnInteraction={false} // should stop playing on user interaction
@@ -22,17 +22,21 @@ const Banner = () => {
           >
             <div className="w-2/3 mx-auto text-center">
               <Slide direction="down" cascade damping={0.3} duration={1000}>
-                <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
+                <h2 className="lg:text-7xl md:text-6xl text-2xl font-archivo text-white">
                   Unlock Your Artistic Potential with Expert Instructors
                 </h2>
               </Slide>
               <Slide direction="up" cascade damping={0.3} duration={1000}>
-                <p className="lg:text-3xl my-5 font-archivo text-white">
+                <p className="lg:text-3xl text-xs my-5 font-archivo text-white">
                   Experience the Joy of Art & Craft!
                 </p>
               </Slide>
               <Slide direction="up" cascade damping={0.3} duration={1000}>
-                <Button label="Enroll Now" hover={true} fontbig={true}></Button>
+                <Button
+                  label="Enroll Now"
+                  hover={true}
+                  fontbig={false}
+                ></Button>
               </Slide>
             </div>
           </div>
@@ -42,36 +46,36 @@ const Banner = () => {
           >
             <div className="w-2/3 mx-auto text-center">
               <Slide cascade damping={0.3} duration={1200} direction="left">
-                <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
+                <h2 className="lg:text-7xl md:text-6xl text-2xl font-archivo text-white">
                   Enroll Now for a Summer of Art & Craft Fun!
                 </h2>
               </Slide>
 
               <Slide cascade damping={0.3} duration={1200} direction="right">
-                <p className="lg:text-3xl my-5 font-archivo text-white">
+                <p className="lg:text-3xl text-xs my-5 font-archivo text-white">
                   Where Imagination Takes Flight!
                 </p>
               </Slide>
 
-              <Button label="Enroll Now" hover={true} fontbig={true}></Button>
+              <Button label="Enroll Now" hover={true} fontbig={false}></Button>
             </div>
           </div>
           <div className="relative" data-src="../../../../public/potery3.jpg">
             <div className="w-2/3 mx-auto text-center">
               <Slide cascade damping={0.3} duration={1200} direction="left">
                 {" "}
-                <h2 className="lg:text-7xl md:text-6xl text-3xl font-archivo text-white">
+                <h2 className="lg:text-7xl md:text-6xl text-2xl font-archivo text-white">
                   Join Us for an Exciting Journey of Art & Craft
                 </h2>
               </Slide>
 
               <Slide cascade damping={0.3} duration={1000} direction="right">
-                <p className="lg:text-3xl my-5 font-archivo text-white">
+                <p className="lg:text-3xl text-xs my-5 font-archivo text-white">
                   Where Imagination Takes Flight!
                 </p>
               </Slide>
 
-              <Button label="Enroll Now" hover={true} fontbig={true}></Button>
+              <Button label="Enroll Now" hover={true} fontbig={false}></Button>
             </div>
           </div>
         </AutoplaySlider>

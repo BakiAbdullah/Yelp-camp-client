@@ -11,10 +11,10 @@ const PopularInstructorsCard = ({ singleInstructor }) => {
   return (
     <>
       <Fade duration={2000} >
-        <div className="max-w-3xl flex justify-center items-center h-full">
+        <div className="lg:max-w-3xl max-w-xl mx-auto flex justify-center items-center lg:h-full">
           <div className="relative bg-chocolate bg-[url('/blob.svg')] group md:w-5/12 w-3/4 h-[300px] transition-all duration-300">
             <div className="flex flex-col">
-              <h1 className="pl-4 md:pl-8 mt-6 md:mt-8 text-xl md:text-2xl font-archivo text-lightAmber transform group-hover:translate-x-6 duration-300 uppercase leading-snug">
+              <h1 className="pl-4 md:pl-5 mt-6 md:mt-6 text-sm md:text-2xl font-archivo text-lightAmber transform group-hover:translate-x-2 duration-500 uppercase leading-snug">
                 <span>
                   {instructor_name}: <br />
                 </span>

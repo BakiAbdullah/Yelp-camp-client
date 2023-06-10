@@ -7,7 +7,7 @@ const NavBottom = () => {
     <div>
       <Sticky enabled={true} top={0} bottomBoundary={500}>
         <nav className="bg-white shadow-sm dark:bg-gray-800">
-          <div className="container flex items-center gap-3 lg:gap-0 justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+          <div className="container flex items-center gap-2 lg:gap-0 justify-center p-6 lg:text-lg text-xs mx-auto text-gray-600 capitalize dark:text-gray-300">
             <NavLink
               to="/"
               className={({ isActive }) =>
