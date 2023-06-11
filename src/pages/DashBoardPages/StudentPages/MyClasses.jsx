@@ -1,14 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import { useClass } from "../../hooks/useClass";
-import Button from "../../components/Button/Button";
+import { useClass } from "../../../hooks/useClass";
+import Button from "../../../components/Button/Button";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { toast } from "react-hot-toast";
 
 const MyClasses = () => {
   const [classes, refetch] = useClass();
   console.log(classes);
-  // How Does Reduce Works?
-  const totalFees = classes.reduce((sum, item) => item.fees + sum, 0);
 
   const handleDelete = (item) => {
     fetch(`${import.meta.env.VITE_API_URL}/class/${item._id}`, {
@@ -17,11 +15,10 @@ const MyClasses = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
-          refetch();  
+          refetch();
           toast.success("Your file has been deleted.");
         }
       });
-    
   };
   return (
     <>
@@ -30,9 +27,10 @@ const MyClasses = () => {
       </Helmet>
       <div>
         <div className="flex justify-around items-center my-10">
-          <p className="font-semibold text-darkGray text-lg">Total classes : {classes.length}</p>
-          <p className="font-semibold text-darkGray text-lg">Total Fees : ${totalFees}</p>
-          <Button label={"Purchase"} fontSmall={true}></Button>
+          <p className="font-bold font-archivo text-darkGray text-2xl">
+            Total classes :{" "}
+            <span className="text-lightAmber">{classes.length}</span>
+          </p>
         </div>
         <div className="-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -96,9 +94,10 @@ const MyClasses = () => {
                         {singleClass.available_seats}
                       </p>
                     </td>
-                    <td className="py-10  flex justify-center items-center text-sm">
+                    <td className="py-10 flex  justify-evenly items-center text-sm">
+                      <Button label={"Purchase"} fontSmall={true}></Button>
                       <RiDeleteBin6Fill
-                      onClick={()=> handleDelete(singleClass)}
+                        onClick={() => handleDelete(singleClass)}
                         size={25}
                         className="text-red-600 cursor-pointer hover:text-red-700 duration-200 "
                       ></RiDeleteBin6Fill>

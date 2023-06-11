@@ -1,14 +1,16 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Main from '../layouts/Main'
-import Home from '../pages/Home/Home'
-import ErrorPage from '../pages/ErrorPage/ErrorPage'
-import Login from '../pages/Login/Login'
-import SignUp from '../pages/SignUp/SignUp'
-import Instructors from '../pages/Instructors/Instructors'
-import AllClasses from '../pages/AllClasses/AllClasses'
-import DashboardLayout from '../layouts/Dashboard'
-import PrivateRoute from './PrivateRoute'
-import MyClasses from '../pages/DashBoardPages/MyClasses'
+import { createBrowserRouter } from "react-router-dom";
+import Main from "../layouts/Main";
+import Home from "../pages/Home/Home";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
+import Instructors from "../pages/Instructors/Instructors";
+import AllClasses from "../pages/AllClasses/AllClasses";
+import DashboardLayout from "../layouts/Dashboard";
+import PrivateRoute from "./PrivateRoute";
+import MyClasses from "../pages/DashBoardPages/StudentPages/MyClasses";
+import ManageUsers from "../pages/DashBoardPages/Admin/ManageUsers";
+import ManageClasses from "../pages/DashBoardPages/Admin/ManageClasses";
 
 export const router = createBrowserRouter([
   {
@@ -26,11 +28,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/allClasses",
-        element: (
-        
-            <AllClasses></AllClasses>
-          
-        ),
+        element: <AllClasses></AllClasses>,
       },
       {
         path: "/login",
@@ -53,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myclasses",
         element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "/dashboard/manageusers",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "/dashboard/manageclasses",
+        element: <ManageClasses></ManageClasses>,
       },
     ],
   },

@@ -1,34 +1,30 @@
 import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../Shared/Navbar/Logo";
 import { AiOutlineBars } from "react-icons/ai";
-// import { BsFillHouseAddFill } from "react-icons/bs";
-// import GuestMenu from "./GuestMenu";
+import { SiGoogleclassroom } from "react-icons/si";
+
 import { useAuth } from "../../hooks/useAuth";
 import StudentMenu from "./StudentMenu";
-import HostMenu from "./HostMenu";
-import { MdAddHome } from "react-icons/md";
-// import HostMenu from "./HostMenu";
+import AdminMenu from "./AdminMenu";
+import { MdHomeWork } from "react-icons/md";
+import InstructorMenu from "./InstructorMenu";
 
 const SidebarDashboard = () => {
-  // const navigate = useNavigate();
-  const [toggle, setToggle] = useState(false);
   const { user } = useAuth();
-
   const [isActive, setActive] = useState("false");
-  const toggleHandler = (event) => {
-    setToggle(event.target.checked);
-  };
-  // Sidebar Responsive Handler
+
+  // Dashboard Sidebar Toggler
   const handleToggle = () => {
     setActive(!isActive);
   };
 
-  const UserRole = "admin";
+  //TODO: Load data from server by Roles (Making fake AdminRoles)
+  const isAdmin = true;
+  const instructor = false;
 
   return (
     <>
-      {/* Small Screen Navbar */}
       <div className=" text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
@@ -43,22 +39,21 @@ const SidebarDashboard = () => {
           <AiOutlineBars className="h-5 w-5" />
         </button>
       </div>
-      {/* Sidebar */}
+
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[url('/public/blob.svg')] bg-center bg-cover w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col overflow-x-hidden bg-[url('/public/overlay.svg')] bg-cover w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div>
-          {/* Branding & Profile Info */}
           <div>
             <div className="w-full hidden md:flex py-2 justify-center items-center mx-auto">
               <Logo />
             </div>
-            <div className="flex flex-col items-center mt-6 -mx-2">
+            <div className="flex flex-col items-center mt-14 lg:mt-6 -mx-2">
               <Link to="/dashboard">
                 <img
-                  className="object-cover w-20 h-20 border-4 overflow-hidden border-lightGray mx-2 rounded-full"
+                  className="object-cover w-20 h-20  overflow-hidden mx-2 rounded-full"
                   src={user?.photoURL}
                   alt="avatar"
                   referrerPolicy="no-referrer"
@@ -75,28 +70,12 @@ const SidebarDashboard = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {UserRole && UserRole === "admin" ? (
+              {isAdmin ? (
                 <>
-                  <label
-                    htmlFor="Toggle3"
-                    className="inline-flex w-full justify-center items-center px-2 rounded-md cursor-pointer text-gray-800"
-                  >
-                    <input
-                      onChange={toggleHandler}
-                      id="Toggle3"
-                      type="checkbox"
-                      className="hidden peer"
-                    />
-                    <span className="px-4 py-1 font-semibold text-darkGray rounded-l-md bg-darkAmber peer-checked:bg-creamYellow">
-                      Guest
-                    </span>
-                    <span className="px-4 py-1 font-semibold text-darkGray rounded-r-md bg-creamYellow peer-checked:bg-darkAmber">
-                      Host
-                    </span>
-                  </label>
-                  {/* Menu Links */}
-                  {toggle ? <HostMenu></HostMenu> : <StudentMenu></StudentMenu>}
+                  <AdminMenu></AdminMenu>
                 </>
+              ) : instructor ? (
+                <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>
               )}
@@ -105,7 +84,8 @@ const SidebarDashboard = () => {
         </div>
 
         <div>
-          <hr />
+          {/* Common dashboad part for all Roles */}
+          <hr className="text-chocolate" />
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -114,9 +94,21 @@ const SidebarDashboard = () => {
               }`
             }
           >
-            <MdAddHome className="w-5 h-5" />
+            <MdHomeWork className="w-5 h-5" />
 
             <span className="mx-4 font-medium">Home</span>
+          </NavLink>
+          <NavLink
+            to="/allClasses"
+            className={({ isActive }) =>
+              `flex items-center px-4 py-2 mt-5 transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+              }`
+            }
+          >
+            <SiGoogleclassroom className="w-5 h-5" />
+
+            <span className="mx-4 font-medium">Classes</span>
           </NavLink>
         </div>
       </div>

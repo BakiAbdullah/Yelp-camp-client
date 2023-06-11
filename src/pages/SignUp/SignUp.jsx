@@ -32,8 +32,10 @@ const SignUp = () => {
       .then((result) => {
         const loggedUser = result?.user;
         console.log(loggedUser);
-        updateUserProfile(data?.name, data?.photoURL)
-          .then(() => {
+        updateUserProfile(data?.name, data?.image)
+          .then((result) => {
+            console.log(result);
+            //  saveUser(result?.user);
             console.log("user updated");
           })
           .catch((error) => {
