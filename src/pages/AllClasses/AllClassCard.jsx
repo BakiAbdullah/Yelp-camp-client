@@ -47,7 +47,7 @@ const AllClassCard = ({ singleClass }) => {
         .then((data) => {
           if (data.insertedId) {
             toast.success("Classes added successfully");
-            refetch();
+            
           }
         });
     } else {

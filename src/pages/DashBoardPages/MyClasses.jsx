@@ -2,14 +2,27 @@ import { Helmet } from "react-helmet-async";
 import { useClass } from "../../hooks/useClass";
 import Button from "../../components/Button/Button";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import CoverParallax from "../../components/Shared/CoverParallax/CoverParallax";
-import MainHeading from "../../components/MainHeading/MainHeading";
+import { toast } from "react-hot-toast";
 
 const MyClasses = () => {
   const [classes, refetch] = useClass();
   console.log(classes);
   // How Does Reduce Works?
   const totalFees = classes.reduce((sum, item) => item.fees + sum, 0);
+
+  const handleDelete = (item) => {
+    fetch(`${import.meta.env.VITE_API_URL}/class/${item._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          refetch();  
+          toast.success("Your file has been deleted.");
+        }
+      });
+    
+  };
   return (
     <>
       <Helmet>
@@ -77,21 +90,15 @@ const MyClasses = () => {
 
                     <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       ${singleClass.fees}
-                      {/* <span className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                        <span
-                          aria-hidden
-                          className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"
-                        ></span>
-                        <span className="relative">4</span>
-                      </span> */}
                     </td>
-                    <td className="px-5 py-5 border-b border-gray text-left bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
+                    <td className="px-5 py-5 bg-white text-sm">
+                      <p className="text-gray-900 text-justify ms-14 whitespace-no-wrap">
                         {singleClass.available_seats}
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray bg-white text-center space-x-4 text-sm">
+                    <td className="py-10  flex justify-center items-center text-sm">
                       <RiDeleteBin6Fill
+                      onClick={()=> handleDelete(singleClass)}
                         size={25}
                         className="text-red-600 cursor-pointer hover:text-red-700 duration-200 "
                       ></RiDeleteBin6Fill>

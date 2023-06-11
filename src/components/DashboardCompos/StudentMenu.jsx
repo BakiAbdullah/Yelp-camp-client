@@ -14,7 +14,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const StudentMenu = () => {
   // const navigate = useNavigate();
-  const { user, role, setRole } = useAuth();
+  const {  role } = useAuth();
   // const [modal, setModal] = useState(false);
 
   // const modalHandler = (email) => {
