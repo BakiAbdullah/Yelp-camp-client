@@ -25,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/allClasses",
-        element: <AllClasses></AllClasses>,
+        element: (
+        
+            <AllClasses></AllClasses>
+          
+        ),
       },
       {
         path: "/login",

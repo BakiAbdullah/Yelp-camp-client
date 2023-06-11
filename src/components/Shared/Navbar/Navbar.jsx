@@ -1,4 +1,4 @@
-import { useAuth } from "../../../hooks/useAuth";
+
 import Avatar from "./Avatar";
 import NavBottom from "./NavBottom";
 import './Navbar.css'
@@ -6,8 +6,10 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "../../Button/Button";
+import { useAuth } from "../../../hooks/useAuth";
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const {user, logOut} = useAuth();
+
   return (
     <div>
       <header className="bg-white border-t-8 border-darkAmber">
@@ -116,7 +118,7 @@ const Navbar = () => {
                     </span>
                   </div> */}
                   <Link to='/dashboard'>
-                    <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-12 bg-darkAmber text-white duration-300 rounded-full font-bold px-6 py-2">
+                    <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-14 overflow-hidden bg-darkAmber text-white duration-300 rounded-full font-bold px-8 py-2">
                       Dashboard
                       <span title={`${user ? user?.displayName : 'Not Found'}`} className="absolute -left-2 top-1 px-3">
                         <Avatar></Avatar>

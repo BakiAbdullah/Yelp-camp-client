@@ -1,13 +1,83 @@
 import { Fade } from "react-awesome-reveal";
 import Button from "../../components/Button/Button";
-
+// import Loader from "../../components/Shared/Loader/Loader";
+// import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useClass } from "../../hooks/useClass";
 
 const AllClassCard = ({ singleClass }) => {
-  const { image, class_name, class_details, instructor_name } = singleClass;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const[refetch] = useClass();
+
+  const { user } = useAuth();
+  const {
+    _id,
+    image,
+    class_name,
+    class_details,
+    instructor_name,
+    available_seats,
+    fees,
+  } = singleClass;
+
+  // Add Item to Cart
+  const handleAddClass = (singleClass) => {
+    console.log(singleClass);
+    if (user && user.email) {
+      const selectedClass = {
+        classId: _id,
+        image,
+        fees,
+        available_seats,
+        class_name,
+        instructor_name,
+        email: user.email,
+      };
+      fetch(`${import.meta.env.VITE_API_URL}/selectedClass`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(selectedClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            toast.success("Classes added successfully");
+            refetch();
+          }
+        });
+    } else {
+      toast.error("Please Login to Add Class");
+      navigate("/login", { state: { from: location } });
+    }
+  };
+
+  // // Tanstack Query Implementation
+  // const { data: selectedClass = [], isLoading: loading } = useQuery({
+  //   queryKey: ["allclasses"],
+  //   // enabled: !loading,
+  //   queryFn: async () => {
+  //     const res = await fetch(`${import.meta.env.VITE_API_URL}/selectedClass`);
+  //     return res.json();
+  //   },
+  // });
+
+  // if (loading) {
+  //   return <Loader></Loader>;
+  // }
+
   return (
     <div>
       <div className="mx-auto px-4 max-w-xl">
-        <div className="bg-white shadow-2xl mb-8 rounded-bl-3xl tracking-wide cursor-pointer">
+        <div
+          className={`${
+            available_seats === 0 ? "bg-red-500 text-white" : ""
+          } shadow-2xl mb-8 rounded-bl-3xl tracking-wide cursor-pointer`}
+        >
           <Fade cascade damping={0.5} duration={2000}>
             <div className="overflow-hidden bg-pink ">
               <img
@@ -18,42 +88,39 @@ const AllClassCard = ({ singleClass }) => {
             </div>
           </Fade>
           <div className="px-4 py-2 mt-2">
-            <h2 className="font-bold text-2xl text-gray-800 tracking-normal">
+            <h2 className="font-bold text-2xl text-darkGray tracking-normal">
               {class_name}
             </h2>
             <p className="text-sm text-gray-700 my-2">
               {class_details.slice(0, 50)}...
             </p>
             <div className="flex items-center justify-between my-4 ">
-              <Button label={'Select'} hover={true}></Button>
-              <a href="#" className="flex text-gray-700">
-                <svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="w-6 h-6 text-darkAmber"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
-                  />
-                </svg>
-                5
-              </a>
-            </div>
-            <div className="author flex items-center -ml-3 my-3">
-              <div className="user-logo">
-                <img
-                  className="w-12 h-12 object-cover rounded-full mx-4  shadow"
-                  src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80"
-                  alt="avatar"
-                />
+              <p className="font-semibold text-darkGray">
+                Available Seats: {available_seats}
+              </p>
+              <div onClick={() => handleAddClass(singleClass)}>
+                <Button
+                  disabled={available_seats === 0}
+                  label={"Select"}
+                  hover={true}
+                ></Button>
               </div>
-              <h2 className="text-sm tracking-tighter text-gray-900">
-                <a href="#">By {instructor_name} </a>
-              </h2>
+            </div>
+            <div className="flex items-center justify-between my-3">
+              <div className="flex items-center justify-center">
+                <div className="user-logo">
+                  <img
+                    className="w-12 h-12 object-cover rounded-full me-3  shadow"
+                    src="/placeholder.jpg"
+                    alt="avatar"
+                  />
+                </div>
+                <p className="text-sm tracking-tighter text-gray-900">
+                  <a href="#">By {instructor_name} </a>
+                </p>
+              </div>
+
+              <p className="font-semibold text-darkAmber">Price: ${fees}</p>
             </div>
           </div>
         </div>

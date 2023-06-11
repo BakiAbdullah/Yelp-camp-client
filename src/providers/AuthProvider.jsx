@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -9,15 +9,15 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-} from 'firebase/auth'
-import { app } from '../firebase/firebase.config'
-import { getUserRole } from '../hooks/useUserInfo'
-import axios from 'axios'
+} from "firebase/auth";
+import { app } from "../firebase/firebase.config";
+import { getUserRole } from "../hooks/useUserInfo";
+import axios from "axios";
 
-export const AuthContext = createContext(null)
+export const AuthContext = createContext(null);
 
-const auth = getAuth(app)
-const googleProvider = new GoogleAuthProvider()
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -82,12 +82,8 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access-token");
         setLoading(false);
       }
-      // Fetching using Axios Starts ==============
-
+      // Fetching using Axios Ends ==============
       console.log("current user", currentUser);
-
-      console.log("current user", currentUser);
-      setLoading(false);
     });
     return () => {
       return unsubscribe();
@@ -111,6 +107,6 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
-}
+};
 
-export default AuthProvider
+export default AuthProvider;

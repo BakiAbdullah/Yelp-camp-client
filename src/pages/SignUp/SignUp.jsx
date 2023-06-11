@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/Shared/Navbar/Logo";
 import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -10,8 +10,8 @@ import PopupLogin from "../../components/PopUpLogin/PopupLogin";
 import { saveUser } from "../../hooks/useUserInfo";
 
 const SignUp = () => {
-  const { createUser, loading, setLoading } = useAuth();
-  // const navigate = useNavigate();
+  const { createUser, loading, updateUserProfile, setLoading } = useAuth();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -21,18 +21,28 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(data);
     // Data from AuthProvider / User
-    createUser(data?.email, data?.name, data?.photoURL, data?.password)
+    createUser(data?.email, data?.password)
       .then((result) => {
         const loggedUser = result?.user;
         console.log(loggedUser);
+        updateUserProfile(data?.name, data?.photoURL)
+          .then(() => {
+            console.log("user updated");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         saveUser(result?.user);
+        reset();
         toast.success("User Created Successfully!");
+        navigate('/')
       })
       .catch((err) => {
         console.log(err);
@@ -174,7 +184,7 @@ const SignUp = () => {
               <input
                 className="block w-full caret-darkAmber p-4 text-lg rounded-sm bg-black"
                 type={show ? "text" : "password"}
-                {...register("password", {
+                {...register("confirm password", {
                   required: true,
                   minLength: 6,
                   pattern:
