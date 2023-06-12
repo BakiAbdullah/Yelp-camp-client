@@ -12,8 +12,8 @@ import InstructorMenu from "./InstructorMenu";
 
 const SidebarDashboard = () => {
   const [isActive, setActive] = useState("false");
-  const { user } = useAuth();
-  // console.log(userRole, user)
+  const { user, userRole } = useAuth();
+  console.log('User Role is ',userRole)
 
   // Dashboard Sidebar Toggler
   const handleToggle = () => {
@@ -21,8 +21,8 @@ const SidebarDashboard = () => {
   };
 
   //TODO: Load data from server by Roles (Making fake AdminRoles)
-  const isAdmin = true;
-  const isInstructor = false;
+  // const isAdmin = true;
+  // const isInstructor = false;
 
   return (
     <>
@@ -71,11 +71,11 @@ const SidebarDashboard = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {isAdmin ? (
+              {userRole === 'admin' ? (
                 <>
                   <AdminMenu></AdminMenu>
                 </>
-              ) : isInstructor ? (
+              ) : userRole === 'instructor' ? (
                 <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>

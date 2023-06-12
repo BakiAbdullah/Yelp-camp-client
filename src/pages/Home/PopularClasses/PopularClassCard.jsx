@@ -1,7 +1,8 @@
 import { Fade } from "react-awesome-reveal";
 
 const PopularClassCard = ({ singleClass }) => {
-  const { image, class_name, class_details, instructor_name } = singleClass;
+  const { image, class_name, class_details, instructor_name, students_count } =
+    singleClass;
   return (
     <div>
       <div className="mx-auto px-4 max-w-xl">
@@ -19,8 +20,11 @@ const PopularClassCard = ({ singleClass }) => {
             <h2 className="font-bold text-2xl text-gray-800 tracking-normal">
               {class_name}
             </h2>
-            <p className="text-sm text-gray-700 my-2">
+            <p className="text-sm text-darkGray my-2">
               {class_details.slice(0, 50)}...
+            </p>
+            <p className="text-sm font-semibold text-darkGray my-3">
+              Students:<span className="text-darkAmber"> {students_count}</span>
             </p>
             <div className="flex items-center justify-between mt-2 mx-6">
               <a href="#" className="text-darkAmber text-xs -ml-6 ">

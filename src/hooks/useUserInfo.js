@@ -3,7 +3,6 @@ export const saveUser = (user) => {
   const currentUser = {
     email: user.email,
     name: user.displayName,
-    role: 'student',
     image: user.photoURL
   };
 
@@ -19,11 +18,11 @@ export const saveUser = (user) => {
 };
 
 
-// Get a User role
-// export const getUserRole = async (email) => {
-//   const response = await fetch(
-//     `${import.meta.env.VITE_API_URL}/users/${email}`
-//   );
-//   const user = await response.json();
-//   return user?.role;
-// };
+// Get a User role from DB
+export const getUserRole = async (email) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/users/${email}`
+  );
+  const user = await response.json();
+  return user?.role;
+};

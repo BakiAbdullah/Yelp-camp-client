@@ -16,7 +16,7 @@ const ManageUsers = () => {
     },
   });
 
-  //TODO: Change user Roles
+  // Make Admin API
   const handleMakeAdmin = (user) => {
     fetch(`${import.meta.env.VITE_API_URL}/users/admin/${user?._id}`, {
       method: "PATCH",
@@ -30,6 +30,8 @@ const ManageUsers = () => {
         }
       });
   };
+
+  // Make Instructors API
   const handleMakeInstructor = (user) => {
     fetch(`${import.meta.env.VITE_API_URL}/users/instructor/${user?._id}`, {
       method: "PATCH",
@@ -89,7 +91,7 @@ const ManageUsers = () => {
                       <div className="flex items-center">
                         <div className="">
                           <img
-                            className="object-cover w-20 h-20  overflow-hidden mx-2 rounded-full"
+                            className="object-cover w-14 h-14  overflow-hidden mx-2 rounded-full"
                             src={user?.image}
                             alt="avatar"
                             referrerPolicy="no-referrer"

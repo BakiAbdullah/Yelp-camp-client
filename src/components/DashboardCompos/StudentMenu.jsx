@@ -4,7 +4,7 @@ import {
   MdLibraryAddCheck,
   MdAccountBalanceWallet,
 } from "react-icons/md";
-// import { GrUserAdmin } from "react-icons/gr";
+import {  FaBuilding } from "react-icons/fa";
 // import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 // import { useAuth } from "../../hooks/useAuth";
@@ -30,6 +30,18 @@ const StudentMenu = () => {
 
   return (
     <>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+            isActive ? "bg-creamYellow  text-gray-700" : "text-gray-600"
+          }`
+        }
+      >
+        <FaBuilding className="w-5 h-5" />
+
+        <span className="mx-4 font-medium">Users Home</span>
+      </NavLink>
       <NavLink
         to="/dashboard/myclasses"
         className={({ isActive }) =>
