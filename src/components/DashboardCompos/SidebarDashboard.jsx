@@ -11,8 +11,9 @@ import { MdHomeWork } from "react-icons/md";
 import InstructorMenu from "./InstructorMenu";
 
 const SidebarDashboard = () => {
-  const { user } = useAuth();
   const [isActive, setActive] = useState("false");
+  const { user } = useAuth();
+  // console.log(userRole, user)
 
   // Dashboard Sidebar Toggler
   const handleToggle = () => {
@@ -21,7 +22,7 @@ const SidebarDashboard = () => {
 
   //TODO: Load data from server by Roles (Making fake AdminRoles)
   const isAdmin = true;
-  const instructor = false;
+  const isInstructor = false;
 
   return (
     <>
@@ -74,7 +75,7 @@ const SidebarDashboard = () => {
                 <>
                   <AdminMenu></AdminMenu>
                 </>
-              ) : instructor ? (
+              ) : isInstructor ? (
                 <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>

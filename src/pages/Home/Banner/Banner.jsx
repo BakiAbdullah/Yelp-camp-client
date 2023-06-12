@@ -18,7 +18,7 @@ const Banner = () => {
         >
           <div
             className="relative"
-            data-src="/public/baner13.jpg"
+            data-src="/baner13.jpg"
           >
             <div className="w-2/3 mx-auto text-center">
               <Slide direction="left" cascade damping={0.3} duration={1000}>
@@ -42,7 +42,7 @@ const Banner = () => {
           </div>
           <div
             className="relative"
-            data-src="../../../../public/ART_Studio.jpg"
+            data-src="/ART_Studio.jpg"
           >
             <div className="w-2/3 mx-auto text-center">
               <Slide cascade damping={0.3} duration={1200} direction="left">
@@ -60,7 +60,7 @@ const Banner = () => {
               <Button label="Enroll Now" hover={true} fontbig={false}></Button>
             </div>
           </div>
-          <div className="relative" data-src="../../../../public/potery3.jpg">
+          <div className="relative" data-src="/potery3.jpg">
             <div className="w-2/3 mx-auto text-center">
               <Slide cascade damping={0.3} duration={1200} direction="left">
                 {" "}

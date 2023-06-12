@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import Button from "../../../components/Button/Button";
-// import {  RiDeleteBin6Fill } from "react-icons/ri";
-import { FaUserShield, FaUserTie } from "react-icons/fa";
-// import { toast } from "react-hot-toast";
+import { FaUser, FaUserShield, FaUserTie } from "react-icons/fa";
+import { toast } from "react-hot-toast";
 
 const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
+      console.log(users);
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/users?email=${users?.email}`
       );
@@ -26,22 +26,23 @@ const ManageUsers = () => {
         console.log(data);
         if (data.modifiedCount) {
           refetch();
-          // toast.success(`${user.name} is an Admin Now!`);
+          toast.success(`${user.name} is an Admin Now!`);
         }
       });
   };
-  // const handleRole = (user) => {
-  //   fetch(`${import.meta.env.VITE_API_URL}/class/${user._id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.deletedCount > 0) {
-  //         refetch();
-  //         toast.success("Your file has been deleted.");
-  //       }
-  //     });
-  // };
+  const handleMakeInstructor = (user) => {
+    fetch(`${import.meta.env.VITE_API_URL}/users/instructor/${user?._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          toast.success(`${user.name} is an Instructor Now!`);
+        }
+      });
+  };
 
   return (
     <div>
@@ -110,26 +111,61 @@ const ManageUsers = () => {
                     <td className="px-5 py-5 bg-white text-sm">
                       <p className="text-gray-900  whitespace-no-wrap">
                         {user?.role === "admin" ? (
-                          <FaUserShield size={22}></FaUserShield>
+                          <span className="flex items-center gap-2">
+                            <FaUserShield
+                              className="text-darkGray"
+                              size={25}
+                            ></FaUserShield>
+                            <span className="text-darkGray font-bold">
+                              Admin
+                            </span>
+                          </span>
                         ) : user.role === "instructor" ? (
-                          <FaUserTie size={22}></FaUserTie>
+                          <span className="flex items-center gap-2">
+                            <FaUserTie
+                              className="text-darkGray"
+                              size={22}
+                            ></FaUserTie>
+                            <span className="text-darkGray font-bold">
+                              Instructor
+                            </span>
+                          </span>
                         ) : (
-                          <p>Student</p>
+                          <span className="flex items-center gap-2">
+                            <FaUser
+                              className="text-darkGray"
+                              size={22}
+                            ></FaUser>
+                            <span className="text-darkGray font-bold">
+                              Student
+                            </span>
+                          </span>
                         )}
                       </p>
                     </td>
                     <td className="py-10 flex justify-center gap-4 items-center text-sm">
                       <Button
-                        onClick={() => handleMakeAdmin(user._id)}
-                        label={"Make Admin"}
+                        onClickHandler={() =>
+                          user && handleMakeInstructor(user)
+                        }
+                        disabled={user.role === "instructor" && true}
+                        label={"Make Instructor"}
                         hover={true}
                         fontSmall={true}
                       ></Button>
                       <Button
-                        label={"Make  Instructor"}
+                        onClickHandler={() => user && handleMakeAdmin(user)}
+                        disabled={user.role === "admin" && true}
+                        label={"Make Admin"}
                         hover={true}
                         fontSmall={true}
                       ></Button>
+                      {/* <button
+                        className="cursor-pointer shadow-sm bg-darkAmber text-white duration-300 rounded-full font-bold text-xs lg:text-base px-6 py-2"
+                        onClick={() => user && handleMakeAdmin(user)}
+                      >
+                        Make Admin
+                      </button> */}
                     </td>
                   </tr>
                 ))}

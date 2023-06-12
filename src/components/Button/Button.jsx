@@ -1,6 +1,14 @@
-const Button = ({ label, hover, fontSmall, disabled }) => {
+const Button = ({
+  label,
+  hover,
+  fontSmall,
+  disabled,
+  onClickHandler,
+  payload,
+}) => {
   return (
     <button
+      onClick={() => onClickHandler(payload)}
       disabled={disabled}
       className={`
       disabled:opacity-40

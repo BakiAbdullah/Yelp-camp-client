@@ -10,7 +10,7 @@ import PopupLogin from "../../components/PopUpLogin/PopupLogin";
 import { saveUser } from "../../hooks/useUserInfo";
 
 const SignUp = () => {
-  const { createUser, loading, updateUserProfile, setLoading } = useAuth();
+  const { createUser, loading, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
@@ -32,19 +32,22 @@ const SignUp = () => {
       .then((result) => {
         const loggedUser = result?.user;
         console.log(loggedUser);
-        updateUserProfile(data?.name, data?.image)
-          .then((result) => {
-            console.log(result);
-            //  saveUser(result?.user);
-            console.log("user updated");
+        // Update user profile with name and image
+        updateUserProfile(data?.name, data?.photoURL)
+          .then(() => {
+            // Save the user to the database with the updated data
+            saveUser({
+              email: data?.email,
+              displayName: data?.name,
+              photoURL: data?.photoURL,
+            });
           })
           .catch((error) => {
             console.log(error);
           });
-        saveUser(result?.user);
         reset();
         toast.success("User Created Successfully!");
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
