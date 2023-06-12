@@ -71,11 +71,11 @@ const SidebarDashboard = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {userRole === 'admin' ? (
+              {userRole && userRole === 'admin' ? (
                 <>
                   <AdminMenu></AdminMenu>
                 </>
-              ) : userRole === 'instructor' ? (
+              ) : userRole && userRole === 'instructor' ? (
                 <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>

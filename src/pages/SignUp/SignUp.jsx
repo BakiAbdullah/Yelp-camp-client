@@ -40,6 +40,7 @@ const SignUp = () => {
               email: data?.email,
               displayName: data?.name,
               photoURL: data?.photoURL,
+              role: "student"
             });
           })
           .catch((error) => {
