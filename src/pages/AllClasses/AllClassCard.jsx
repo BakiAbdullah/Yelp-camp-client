@@ -12,7 +12,7 @@ const AllClassCard = ({ singleClass }) => {
   const location = useLocation();
   const[refetch] = useClass();
 
-  const { user } = useAuth();
+  const { user, userRole } = useAuth();
   const {
     _id,
     image,
@@ -100,7 +100,7 @@ const AllClassCard = ({ singleClass }) => {
               </p>
               <div onClick={() => handleAddClass(singleClass)}>
                 <Button
-                  disabled={available_seats === 0}
+                  disabled={available_seats === 0 || userRole !== 'student'}
                   label={"Select"}
                   hover={true}
                 ></Button>

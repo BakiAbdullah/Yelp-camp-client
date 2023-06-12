@@ -7,7 +7,6 @@ const MainHeading = ({ title, subtitle }) => {
       <h3 className="lg:text-3xl text-2xl uppercase border-b-4 border-double border-lightAmber text-darkGray font-archivo mb-12 py-2">
         {subtitle}
       </h3>
-      {/* <div className="w-[5px] h-[50px] absolute top-9 left-10 bg-darkAmber"></div> */}
     </div>
   );
 };

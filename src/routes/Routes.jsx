@@ -13,6 +13,7 @@ import ManageUsers from "../pages/DashBoardPages/Admin/ManageUsers";
 import ManageClasses from "../pages/DashBoardPages/Admin/ManageClasses";
 import MyClass from "../pages/DashBoardPages/InstructorsPage/MyClass";
 import AddClass from "../pages/DashBoardPages/InstructorsPage/AddClass";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -57,27 +58,43 @@ export const router = createBrowserRouter([
       },
       // Student Routes Ends ===================================
 
-      // Admin Routes =======================================
+      //! Admin Routes =======================================
       {
         path: "/dashboard/manageusers",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/manageclasses",
-        element: <ManageClasses></ManageClasses>,
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
       },
-      // Admin Routes Ends ==================================
+      //! Admin Routes Ends ==================================
 
-      // Instructors Routes ======================
+      //* Instructors Routes ======================
       {
         path: "/dashboard/myclass",
-        element: <MyClass></MyClass>,
+        element: (
+          <AdminRoute>
+            <MyClass></MyClass>
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addclass",
-        element: <AddClass></AddClass>,
+        element: (
+          <AdminRoute>
+            <AddClass></AddClass>
+          </AdminRoute>
+        ),
       },
-      // Instructors Routes Ends =================
+      //* Instructors Routes Ends =================
     ],
   },
 ]);
