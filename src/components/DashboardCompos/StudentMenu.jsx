@@ -31,14 +31,14 @@ const StudentMenu = () => {
   return (
     <>
       <NavLink
-        to="/dashboard"
+        to="/dashboard/home"
         className={({ isActive }) =>
           `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
             isActive ? "bg-creamYellow  text-gray-700" : "text-gray-600"
           }`
         }
       >
-        <FaBuilding className="w-5 h-5" />
+        <FaBuilding className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">Users Home</span>
       </NavLink>
@@ -50,7 +50,7 @@ const StudentMenu = () => {
           }`
         }
       >
-        <MdLibraryBooks className="w-5 h-5" />
+        <MdLibraryBooks className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">My Selected Classes</span>
       </NavLink>
@@ -62,14 +62,14 @@ const StudentMenu = () => {
           }`
         }
       >
-        <MdAccountBalanceWallet className="w-5 h-5" />
+        <MdAccountBalanceWallet className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">Payment History</span>
       </NavLink>
 
       {!role && (
         <div className="flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform text-gray-600  hover:bg-gray-300   hover:text-gray-700 cursor-pointer">
-          <MdLibraryAddCheck className="w-5 h-5" />
+          <MdLibraryAddCheck className="w-5 h-5 text-darkGray" />
 
           <span className="mx-4 font-medium">My Enrolled Class</span>
         </div>

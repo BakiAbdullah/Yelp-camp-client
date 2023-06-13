@@ -21,13 +21,15 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
+  const [userRole, setUserRole] = useState(null);
   // getting a user Role
   useEffect(() => {
-    if (user) {
-      getUserRole(user.email).then((data) => setUserRole(data));
+    setLoading(true)
+    if (user?.email) {
+      getUserRole(user?.email).then((data) => setUserRole(data));
+      setLoading(false);
     }
   }, [user]);
 

@@ -3,16 +3,17 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "../Shared/Navbar/Logo";
 import { AiOutlineBars } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
-
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useAuth } from "../../hooks/useAuth";
 import StudentMenu from "./StudentMenu";
 import AdminMenu from "./AdminMenu";
 import { MdHomeWork } from "react-icons/md";
 import InstructorMenu from "./InstructorMenu";
+import Loader from "../Shared/Loader/Loader";
 
 const SidebarDashboard = () => {
   const [isActive, setActive] = useState("false");
-  const { user, userRole } = useAuth();
+  const { user, userRole, loading, logOut } = useAuth();
   console.log('User Role is ',userRole)
 
   // Dashboard Sidebar Toggler
@@ -23,6 +24,10 @@ const SidebarDashboard = () => {
   //TODO: Load data from server by Roles (Making fake AdminRoles)
   // const isAdmin = true;
   // const isInstructor = false;
+
+   if (loading) {
+     return <Loader></Loader>; // Show a loading indicator while fetching user role
+   }
 
   return (
     <>
@@ -71,11 +76,11 @@ const SidebarDashboard = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {userRole && userRole === 'admin' ? (
+              {userRole && userRole === "admin" ? (
                 <>
                   <AdminMenu></AdminMenu>
                 </>
-              ) : userRole && userRole === 'instructor' ? (
+              ) : userRole && userRole === "instructor" ? (
                 <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>
@@ -95,7 +100,7 @@ const SidebarDashboard = () => {
               }`
             }
           >
-            <MdHomeWork className="w-5 h-5" />
+            <MdHomeWork className="w-5 h-5 text-darkGray" />
 
             <span className="mx-4 font-medium">Home</span>
           </NavLink>
@@ -107,9 +112,25 @@ const SidebarDashboard = () => {
               }`
             }
           >
-            <SiGoogleclassroom className="w-5 h-5" />
+            <SiGoogleclassroom className="w-5 h-5 text-darkGray" />
 
-            <span className="mx-4 font-medium">Classes</span>
+            <span className="mx-4  font-medium">Classes</span>
+          </NavLink>
+          <NavLink
+            onClick={logOut}
+            to="/login"
+            className={({ isActive }) =>
+              `flex items-center px-4 py-2 mt-5 transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+                isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+              }`
+            }
+          >
+            <RiLogoutCircleRLine
+              className="text-darkGray font-extrabold hover:animate-pulse duration-200"
+              size={24}
+            ></RiLogoutCircleRLine>
+
+            <span className="mx-3 font-medium">Logout</span>
           </NavLink>
         </div>
       </div>

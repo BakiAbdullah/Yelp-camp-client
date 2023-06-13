@@ -6,9 +6,6 @@ import SubHeading from "../../../components/MainHeading/SubHeading";
 import Button from "../../../components/Button/Button";
 
 const ManageClasses = () => {
-  // const { loading, setLoading } = useAuth();
-  // const [pendingClasses, setPendingClasses] = useState([]);
-  // const [disabled, setDisbled] = useState(false);
 
   const { data: pendingClasses = [], refetch } = useQuery(
     ["pendingClasses"],
@@ -28,8 +25,6 @@ const ManageClasses = () => {
   // }, []);
 
   const handleApprove = (manageClass) => {
-    // setDisbled(true);
-    // setLoading(false);
     fetch(
       `${import.meta.env.VITE_API_URL}/dashboard/approvedClasses/${
         manageClass._id
@@ -47,30 +42,25 @@ const ManageClasses = () => {
         }
       });
 
-    // fetch("http://localhost:5000/danceclasses", {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(manageClass),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     // if (data.insertedId) {
-    //     //     Swal.fire({
-    //     //         position: 'top-end',
-    //     //         icon: 'success',
-    //     //         title: 'Class Submitted Successfully',
-    //     //         showConfirmButton: false,
-    //     //         timer: 1500
-    //     //     })
-    //     // }
-    //   });
+    fetch(`${import.meta.env.VITE_API_URL}/allClasses/approved`, {
+      method: "PUT",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(manageClass),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.upsertedCount) {
+          toast.success("Class Added");
+        }
+      });
 
   };
+
+  // Deny A Class
   const handleDeny = (manageClass) => {
-    // setDisbled(true);
     fetch(
       `${import.meta.env.VITE_API_URL}/dashboard/deniedClasses/${
         manageClass._id
@@ -178,14 +168,14 @@ const ManageClasses = () => {
                     <td className="py-10  flex border-b border-gray gap-1  justify-evenly items-center text-sm">
                       <Button
                         onClickHandler={() => handleApprove(pendingClass)}
-                        disabled={pendingClass.status === "approved"}
+                        disabled={pendingClass.status === "approved" || pendingClass.status === "denied"}
                         label={"Approve"}
                         fontSmall={true}
                         hover={true}
                       ></Button>
                       <Button
                         onClickHandler={() => handleDeny(pendingClass)}
-                        disabled={pendingClass.status === "denied"}
+                        disabled={ pendingClass.status === "approved" || pendingClass.status === "denied"}
                         label={"Deny"}
                         fontSmall={true}
                         hover={true}

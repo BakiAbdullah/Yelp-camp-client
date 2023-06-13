@@ -15,6 +15,7 @@ import MyClass from "../pages/DashBoardPages/InstructorsPage/MyClass";
 import AddClass from "../pages/DashBoardPages/InstructorsPage/AddClass";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import UserHome from "../pages/DashBoardPages/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
     ),
     children: [
       // Student Routes ========================================
+      {
+        path: "/dashboard/home",
+        element: <UserHome></UserHome>
+      },
       {
         path: "/dashboard/myclasses",
         element: (

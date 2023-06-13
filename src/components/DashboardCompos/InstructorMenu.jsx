@@ -6,14 +6,14 @@ const InstructorMenu = () => {
   return (
     <>
       <NavLink
-        to="/dashboard"
+        to="/dashboard/home"
         className={({ isActive }) =>
           `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
             isActive ? "bg-creamYellow  text-gray-700" : "text-gray-600"
           }`
         }
       >
-        <FaBuilding className="w-5 h-5" />
+        <FaBuilding className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">Instructors Home</span>
       </NavLink>
@@ -25,7 +25,7 @@ const InstructorMenu = () => {
           }`
         }
       >
-        <FaAddressBook className="w-5 h-5" />
+        <FaAddressBook className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">Add Class</span>
       </NavLink>
@@ -37,7 +37,7 @@ const InstructorMenu = () => {
           }`
         }
       >
-        <FaUsersCog className="w-5 h-5" />
+        <FaUsersCog className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium"> My Classes</span>
       </NavLink>

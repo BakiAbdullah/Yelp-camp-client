@@ -12,7 +12,7 @@ const AdminMenu = () => {
           }`
         }
       >
-        <MdAdminPanelSettings className="w-6 h-6" />
+        <MdAdminPanelSettings className="w-6 h-6 text-darkGray" />
 
         <span className="mx-4 font-medium">Admin Home</span>
       </NavLink>
@@ -24,7 +24,7 @@ const AdminMenu = () => {
           }`
         }
       >
-        <FaUsers className="w-5 h-5" />
+        <FaUsers className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium">Manage Users</span>
       </NavLink>
@@ -36,7 +36,7 @@ const AdminMenu = () => {
           }`
         }
       >
-        <MdBookmarkAdd className="w-5 h-5" />
+        <MdBookmarkAdd className="w-5 h-5 text-darkGray" />
 
         <span className="mx-4 font-medium"> Manage Classes</span>
       </NavLink>

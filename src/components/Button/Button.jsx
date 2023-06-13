@@ -6,9 +6,14 @@ const Button = ({
   onClickHandler,
   payload,
 }) => {
+   const handleClick = () => {
+     if (typeof onClickHandler === "function") {
+       onClickHandler(payload);
+     }
+   };
   return (
     <button
-      onClick={() => onClickHandler(payload)}
+      onClick={handleClick}
       disabled={disabled}
       className={`
       disabled:opacity-40
