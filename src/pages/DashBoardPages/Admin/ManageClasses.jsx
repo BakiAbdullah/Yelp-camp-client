@@ -16,13 +16,6 @@ const ManageClasses = () => {
       return response.json();
     }
   );
-  // useEffect(() => {
-  //     fetch('http://localhost:5000/dashboard/pendingclasses')
-  //         .then(res => res.json())
-  //         .then(data => {
-  //             setPendingClasses(data);
-  //         })
-  // }, []);
 
   const handleApprove = (manageClass) => {
     fetch(

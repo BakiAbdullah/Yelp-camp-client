@@ -14,7 +14,7 @@ import Loader from "../Shared/Loader/Loader";
 const SidebarDashboard = () => {
   const [isActive, setActive] = useState("false");
   const { user, userRole, loading, logOut } = useAuth();
-  console.log('User Role is ',userRole)
+  console.log('User Role is',userRole)
 
   // Dashboard Sidebar Toggler
   const handleToggle = () => {

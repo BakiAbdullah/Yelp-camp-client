@@ -1,4 +1,4 @@
-# Yelp Camp A summer Camp School of Arts & Crafts
+# Yelp Camp | A summer Camp School of Arts & Crafts
 A Full Stack Project with React, Tailwind, MongoDB and Express, Authentication (Firebase and JWT)
 <br/>
 
@@ -22,8 +22,8 @@ https://summer-camp-3860e.web.app/
 ## My GitHub Private Repo Link
 Client Side: https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-BakiAbdullah <br/>
 Server Side: https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-BakiAbdullah <br/>
-Admin Email : jhon@gmail.com
+Admin Email : jhon@gmail.com <br/>
 Admin Password : Jhon12!!  <br/>
 
-Instructor Email: abir@gmail.com
+Instructor Email: abir@gmail.com <br/>
 Instructor Password: Abir12@

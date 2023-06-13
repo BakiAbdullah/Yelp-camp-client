@@ -3,6 +3,8 @@ import { useClass } from "../../../hooks/useClass";
 import Button from "../../../components/Button/Button";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import SubHeading from "../../../components/MainHeading/SubHeading";
 
 const MyClasses = () => {
   const [classes, refetch] = useClass();
@@ -27,10 +29,7 @@ const MyClasses = () => {
       </Helmet>
       <div>
         <div className="flex justify-around items-center my-10">
-          <p className="font-bold font-archivo text-darkGray text-2xl">
-            Total classes :{" "}
-            <span className="text-lightAmber">{classes.length}</span>
-          </p>
+          <SubHeading title={"My Selected Classes"}></SubHeading>
         </div>
         <div className="-mx-4 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
@@ -95,7 +94,11 @@ const MyClasses = () => {
                       </p>
                     </td>
                     <td className="py-10 flex  justify-evenly items-center text-sm">
-                      <Button label={"Purchase"} fontSmall={true}></Button>
+                      {/* Payment Button */}
+                      <Link to="/dashboard/payment">
+                        <Button label={"Purchase"} fontSmall={true}></Button>
+                      </Link>
+
                       <RiDeleteBin6Fill
                         onClick={() => handleDelete(singleClass)}
                         size={25}

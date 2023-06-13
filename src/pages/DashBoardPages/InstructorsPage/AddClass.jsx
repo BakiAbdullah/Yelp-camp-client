@@ -3,10 +3,12 @@ import { useAuth } from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import SubHeading from "../../../components/MainHeading/SubHeading";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddClass = () => {
   const categories = ["Wood Arts", "Glass Studio", "Clay Studio", "Art Education"];
   const navigate = useNavigate();
+  const [axiosSecure] = useAxiosSecure();
 
   const { user } = useAuth();
   const instructor_name = user.displayName;
@@ -39,8 +41,8 @@ const AddClass = () => {
    
     console.log(newClass);
 
-    // Posted classes for Instructors
-    fetch(`${import.meta.env.VITE_API_URL}/pendingClasses`, {
+    // Posted classes for Instructors without Axios
+    /* fetch(`${import.meta.env.VITE_API_URL}/pendingClasses`, {
       method: "POST",
       headers: {
         "content-Type": "application/json",
@@ -57,7 +59,20 @@ const AddClass = () => {
         } else {
           toast.error("You Have Already Submitted This Class");
         }
+      }); */
+
+      //TODO: AXIOS SECURE
+      axiosSecure.post("/pendingClasses", newClass).then((data) => {
+        console.log('after posting a Class With Axios item',data);
+        // refetch();
+        if (data.data.insertedId) {
+          toast.success("Class Submitted successfully!");
+          navigate("/dashboard/myclass");
+        } else {
+          toast.error("You Have Already Submitted This Class");
+        }
       });
+      
   };
 
   return (

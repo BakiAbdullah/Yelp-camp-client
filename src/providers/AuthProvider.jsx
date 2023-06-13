@@ -28,8 +28,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true)
     if (user?.email) {
-      getUserRole(user?.email).then((data) => setUserRole(data));
-      setLoading(false);
+      getUserRole(user?.email).then((data) => {
+        setUserRole(data);
+        setLoading(false);
+      });
     }
   }, [user]);
 
