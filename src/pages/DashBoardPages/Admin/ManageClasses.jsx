@@ -1,16 +1,14 @@
 
-
-import  {  useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "../../../hooks/useAuth";
+// import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import SubHeading from "../../../components/MainHeading/SubHeading";
 import Button from "../../../components/Button/Button";
 
 const ManageClasses = () => {
-  const { loading, setLoading } = useAuth();
+  // const { loading, setLoading } = useAuth();
   // const [pendingClasses, setPendingClasses] = useState([]);
-  const [disabled, setDisbled] = useState(false);
+  // const [disabled, setDisbled] = useState(false);
 
   const { data: pendingClasses = [], refetch } = useQuery(
     ["pendingClasses"],
@@ -30,10 +28,10 @@ const ManageClasses = () => {
   // }, []);
 
   const handleApprove = (manageClass) => {
-    setDisbled(true);
-    setLoading(false);
+    // setDisbled(true);
+    // setLoading(false);
     fetch(
-      `${import.meta.env.VITE_API_URL}/dashboard/approvedclasses/${
+      `${import.meta.env.VITE_API_URL}/dashboard/approvedClasses/${
         manageClass._id
       }`,
       {
@@ -72,10 +70,15 @@ const ManageClasses = () => {
 
   };
   const handleDeny = (manageClass) => {
-    setDisbled(true);
-    fetch(`http://localhost:5000/dashboard/deniedclasses/${manageClass._id}`, {
-      method: "PATCH",
-    })
+    // setDisbled(true);
+    fetch(
+      `${import.meta.env.VITE_API_URL}/dashboard/deniedClasses/${
+        manageClass._id
+      }`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -175,24 +178,25 @@ const ManageClasses = () => {
                     <td className="py-10 flex  justify-evenly items-center text-sm">
                       <Button
                         onClickHandler={() => handleApprove(pendingClass)}
+                        disabled={pendingClass.status === "approved"}
                         label={"Approve"}
                         fontSmall={true}
                         hover={true}
                       ></Button>
                       <Button
                         onClickHandler={() => handleDeny(pendingClass)}
+                        disabled={pendingClass.status === "denied"}
                         label={"Deny"}
                         fontSmall={true}
                         hover={true}
                       ></Button>
                       <Button
-                        onClickHandler={() => ''}
+                        onClickHandler={() => ""}
                         label={"feedback"}
                         fontSmall={true}
                         hover={false}
                       ></Button>
                     </td>
-                    
                   </tr>
                 ))}
               </tbody>

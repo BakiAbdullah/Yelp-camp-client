@@ -100,7 +100,7 @@ const AllClassCard = ({ singleClass }) => {
               </p>
               <div onClick={() => handleAddClass(singleClass)}>
                 <Button
-                  disabled={available_seats === 0 || userRole !== 'student'}
+                  disabled={available_seats === 0 || userRole === 'admin' || userRole === 'instructor'}
                   label={"Select"}
                   hover={true}
                 ></Button>

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
@@ -101,21 +100,25 @@ const MyClass = () => {
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray font-semibold text-darkGray text-sm">
-                      <span className="bg-orange-100 p-1 rounded-full px-2 text-xs"> {singleClass.status}</span>
+                      <span className="bg-orange-100 p-1 rounded-full px-2 text-xs">
+                        {" "}
+                        {singleClass.status}
+                      </span>
                     </td>
                     <td className="py-10 flex  justify-evenly items-center text-sm">
-                      {singleClass.status === "denied" && (
+                      {singleClass.status === "denied" ? (
                         <Button
                           label={"Feedback"}
                           fontSmall={true}
                           hover={true}
                         ></Button>
+                      ) : (
+                        <Button
+                          label={"Update"}
+                          fontSmall={true}
+                          hover={true}
+                        ></Button>
                       )}
-                      <Button
-                        label={"Update"}
-                        fontSmall={true}
-                        hover={true}
-                      ></Button>
                       {/* <RiDeleteBin6Fill
                         onClick={() => handleDelete(singleClass)}
                         size={25}
