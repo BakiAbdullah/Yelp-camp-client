@@ -105,6 +105,9 @@ const ManageClasses = () => {
                   Instructor
                 </th>
                 <th className="px-5 py-3 border-b border-gray text-left font-semibold text-darkGray tracking-wider">
+                  Instructor Email
+                </th>
+                <th className="px-5 py-3 border-b border-gray text-left font-semibold text-darkGray tracking-wider">
                   Class Name
                 </th>
 
@@ -120,13 +123,10 @@ const ManageClasses = () => {
                 <th className="px-5 py-3 border-b border-gray text-center font-semibold text-darkGray tracking-wider">
                   Action
                 </th>
-                <th className="px-5 py-3 border-b border-gray text-center font-semibold text-darkGray tracking-wider">
-                  Feedback
-                </th>
               </thead>
               <tbody>
-                {pendingClasses.map((singleClass, index) => (
-                  <tr key={singleClass._id}>
+                {pendingClasses.map((pendingClass, index) => (
+                  <tr key={pendingClass._id}>
                     <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       {index + 1}
                     </td>
@@ -135,7 +135,7 @@ const ManageClasses = () => {
                         <div className="">
                           <img
                             className="w-[50px] h-[50px] object-cover"
-                            src={singleClass.image}
+                            src={pendingClass.image}
                             alt=""
                           />
                         </div>
@@ -144,48 +144,55 @@ const ManageClasses = () => {
 
                     <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       <p className="text-gray-900 whitespace-no-wrap">
-                        {singleClass.instructor_name}
+                        {pendingClass.instructor_name}
+                      </p>
+                    </td>
+                    <td className="px-5 py-5 border-b border-gray bg-white text-sm">
+                      <p className="text-gray-900 whitespace-no-wrap">
+                        {pendingClass.instructor_email}
                       </p>
                     </td>
 
                     <td className="px-5 py-5 bg-white text-sm">
                       <p className="text-gray-900 text-justify  whitespace-no-wrap">
-                        {singleClass.class_name}
+                        {pendingClass.class_name}
                       </p>
                     </td>
                     <td className="px-5 py-5 bg-white text-sm">
                       <p className="text-gray-900 text-justify ms-14 whitespace-no-wrap">
-                        {singleClass.available_seats}
+                        {pendingClass.available_seats}
                       </p>
                     </td>
                     <td className="px-5 py-5 border-b border-gray bg-white text-sm">
-                      ${singleClass.fees}
+                      ${pendingClass.fees}
                     </td>
                     <td className="px-5 py-5 border-b border-gray font-semibold text-darkGray text-sm">
                       <span className="bg-orange-100 p-1 rounded-full px-2 text-xs">
                         {" "}
-                        {singleClass.status}
+                        {pendingClass.status}
                       </span>
                     </td>
                     <td className="py-10 flex  justify-evenly items-center text-sm">
-                      {singleClass.status === "denied" && (
-                        <Button
-                          label={"Feedback"}
-                          fontSmall={true}
-                          hover={true}
-                        ></Button>
-                      )}
                       <Button
-                        label={"Update"}
+                        onClickHandler={() => handleApprove(pendingClass)}
+                        label={"Approve"}
                         fontSmall={true}
                         hover={true}
                       ></Button>
-                      {/* <RiDeleteBin6Fill
-                        onClick={() => handleDelete(singleClass)}
-                        size={25}
-                        className="text-red-600 cursor-pointer hover:text-red-700 duration-200 "
-                      ></RiDeleteBin6Fill> */}
+                      <Button
+                        onClickHandler={() => handleDeny(pendingClass)}
+                        label={"Deny"}
+                        fontSmall={true}
+                        hover={true}
+                      ></Button>
+                      <Button
+                        onClickHandler={() => ''}
+                        label={"feedback"}
+                        fontSmall={true}
+                        hover={false}
+                      ></Button>
                     </td>
+                    
                   </tr>
                 ))}
               </tbody>
