@@ -28,7 +28,7 @@ const MyClass = () => {
   // }
 
   return (
-    <div>
+    <>
       <div className="overflow-x-hidden  flex flex-col justify-center min-h-screen">
         <SubHeading title={"My All Class"}></SubHeading>
         <div className="-mx-4 sm:px-8 py-4 overflow-x-auto">
@@ -129,7 +129,7 @@ const MyClass = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
