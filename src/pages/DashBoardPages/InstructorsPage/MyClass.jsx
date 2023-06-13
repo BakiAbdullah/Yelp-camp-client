@@ -3,12 +3,16 @@ import { useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import Button from "../../../components/Button/Button";
 import SubHeading from "../../../components/MainHeading/SubHeading";
+import Loader from "../../../components/Shared/Loader/Loader";
 
 const MyClass = () => {
   const [pendingClasses, setPendingClasses] = useState([]);
-  const { user } = useAuth();
-  // const currentUser = userData.find((k) => user?.email === k.email);
+  const { user, loading } = useAuth();
+
   useEffect(() => {
+    if (loading) {
+      return <Loader></Loader>;
+    }
     fetch(`${import.meta.env.VITE_API_URL}/pendingClasses/${user?.email}`, {
       method: "GET",
       headers: {
@@ -17,11 +21,12 @@ const MyClass = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        
         setPendingClasses(data);
       });
-  }, [user?.email]);
-
+  }, [user?.email, loading]);
   console.log(pendingClasses);
+
   // const handleFeedback = () => {
   //     console.log(hello);
   // }
@@ -89,12 +94,12 @@ const MyClass = () => {
                       ${singleClass.fees}
                     </td>
 
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       <p className="text-gray-900 text-justify ms-14 whitespace-no-wrap">
                         {singleClass.available_seats}
                       </p>
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       <p className="text-gray-900 text-justify ms-14 whitespace-no-wrap">
                         {singleClass.enrolledCount}
                       </p>
@@ -105,7 +110,7 @@ const MyClass = () => {
                         {singleClass.status}
                       </span>
                     </td>
-                    <td className="py-10 flex  justify-evenly items-center text-sm">
+                    <td className="py-10 flex border-b border-gray  justify-evenly items-center text-sm">
                       {singleClass.status === "denied" ? (
                         <Button
                           label={"Feedback"}

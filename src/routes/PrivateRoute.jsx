@@ -4,16 +4,16 @@ import { useAuth } from '../hooks/useAuth'
 import { toast } from 'react-hot-toast';
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, userRole } = useAuth();
   
   const location = useLocation()
 
-  if (loading) {
+  if (loading || !userRole) {
     return <Loader></Loader>
   }
 
-  if (user) {
-    return children
+  if (user && userRole === "student") {
+    return children;
   } else {
     toast.error("Please Login to Continue The Process!");
   }

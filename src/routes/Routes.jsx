@@ -14,6 +14,7 @@ import ManageClasses from "../pages/DashBoardPages/Admin/ManageClasses";
 import MyClass from "../pages/DashBoardPages/InstructorsPage/MyClass";
 import AddClass from "../pages/DashBoardPages/InstructorsPage/AddClass";
 import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -46,15 +47,17 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <PrivateRoute>
         <DashboardLayout></DashboardLayout>
-      </PrivateRoute>
     ),
     children: [
       // Student Routes ========================================
       {
         path: "/dashboard/myclasses",
-        element: <MyClasses></MyClasses>,
+        element: (
+          <PrivateRoute>
+            <MyClasses></MyClasses>
+          </PrivateRoute>
+        ),
       },
       // Student Routes Ends ===================================
 
@@ -81,17 +84,17 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myclass",
         element: (
-          <AdminRoute>
+          <InstructorRoute>
             <MyClass></MyClass>
-          </AdminRoute>
+          </InstructorRoute>
         ),
       },
       {
         path: "/dashboard/addclass",
         element: (
-          <AdminRoute>
+          <InstructorRoute>
             <AddClass></AddClass>
-          </AdminRoute>
+          </InstructorRoute>
         ),
       },
       //* Instructors Routes Ends =================

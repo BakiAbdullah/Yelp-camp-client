@@ -91,7 +91,7 @@ const ManageClasses = () => {
 
   return (
     <div>
-      <div className="overflow-x-hidden  flex flex-col justify-center min-h-screen">
+      <div className="overflow-x-hidden flex flex-col justify-center min-h-screen">
         <SubHeading title={"Manage Classes"}></SubHeading>
         <div className="-mx-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full text-darkGray shadow rounded-lg overflow-hidden">
@@ -156,12 +156,12 @@ const ManageClasses = () => {
                       </p>
                     </td>
 
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       <p className="text-gray-900 text-justify  whitespace-no-wrap">
                         {pendingClass.class_name}
                       </p>
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5 py-5 border-b border-gray bg-white text-sm">
                       <p className="text-gray-900 text-justify ms-14 whitespace-no-wrap">
                         {pendingClass.available_seats}
                       </p>
@@ -175,7 +175,7 @@ const ManageClasses = () => {
                         {pendingClass.status}
                       </span>
                     </td>
-                    <td className="py-10 flex  justify-evenly items-center text-sm">
+                    <td className="py-10  flex border-b border-gray gap-1  justify-evenly items-center text-sm">
                       <Button
                         onClickHandler={() => handleApprove(pendingClass)}
                         disabled={pendingClass.status === "approved"}
