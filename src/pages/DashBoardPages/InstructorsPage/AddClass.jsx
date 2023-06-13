@@ -2,10 +2,11 @@ import { toast } from "react-hot-toast";
 import { useAuth } from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import SubHeading from "../../../components/MainHeading/SubHeading";
-import { useImageUpload } from "../../../hooks/useImageUpload";
+import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
   const categories = ["Wood Arts", "Glass Studio", "Clay Studio", "Art Education"];
+  const navigate = useNavigate();
 
   const { user } = useAuth();
   const instructor_name = user.displayName;
@@ -20,6 +21,7 @@ const AddClass = () => {
     const class_details = e.target[7].value;
     const students = [];
     const enrolledCount = students.length;
+
     const newClass = {
       class_name,
       category,
@@ -34,10 +36,11 @@ const AddClass = () => {
       students,
     };
 
-   useImageUpload(image)
    
     console.log(newClass);
-    fetch("http://localhost:5000/pendingclasses", {
+
+    // Posted classes for Instructors
+    fetch(`${import.meta.env.VITE_API_URL}/pendingClasses`, {
       method: "POST",
       headers: {
         "content-Type": "application/json",
@@ -50,6 +53,7 @@ const AddClass = () => {
         // refetch();
         if (data.insertedId) {
           toast.success("Class Submitted successfully!");
+          navigate('/dashboard/myclass')
         } else {
           toast.error("You Have Already Submitted This Class");
         }
