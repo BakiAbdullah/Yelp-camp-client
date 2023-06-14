@@ -1,12 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-// import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
 import { useAuth } from "../../../hooks/useAuth";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const CheckoutForm = ({ cart, price }) => {
+const CheckoutForm = ({  fees }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -14,7 +13,7 @@ const CheckoutForm = ({ cart, price }) => {
   const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
   // const [processing, setProcessing] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
+  // const [transactionId, setTransactionId] = useState("");
 
   // useEffect(() => {
   // Create PaymentIntent as soon as the page loads
@@ -28,14 +27,14 @@ const CheckoutForm = ({ cart, price }) => {
   // }, []);
 
   useEffect(() => {
-    console.log(price);
-    if (price > 0) {
-      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+    console.log(fees);
+    if (fees > 0) {
+      axiosSecure.post("/create-payment-intent", { fees }).then((res) => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
     }
-  }, [price, axiosSecure]);
+  }, [fees, axiosSecure]);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -83,13 +82,13 @@ const CheckoutForm = ({ cart, price }) => {
 
     console.log("payment Intent", paymentIntent);
     // setProcessing(false);
-    if (paymentIntent.status === "succeeded") {
+    /* if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
       // Save Payment Information to the server
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
-        price,
+        price: fees,
         date: new Date(),
         quantity: cart.length,
         cartItems: cart.map((item) => item._id),
@@ -106,7 +105,7 @@ const CheckoutForm = ({ cart, price }) => {
           // refetch();
         }
       });
-    }
+    } */
   };
 
   return (
@@ -131,17 +130,17 @@ const CheckoutForm = ({ cart, price }) => {
         <button
           className="shadow-sm bg-darkAmber hover:bg-white hover:text-darkGray cursor-pointer text-white duration-300 rounded-3xl font-bold text-sm px-6 py-2"
           type="submit"
-          disabled={!stripe}
+          disabled={!stripe || !clientSecret}
         >
           Pay
         </button>
       </form>
       {cardError && <p className="text-red-500 font-semibold">{cardError}</p>}
-      {transactionId && (
+      {/* {transactionId && (
         <p className="text-green-500">
           Your Transaction completed with transactionId: {transactionId}
         </p>
-      )}
+      )} */}
     </>
   );
 };

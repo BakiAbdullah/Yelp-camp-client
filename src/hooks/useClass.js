@@ -13,7 +13,7 @@ export const useClass = () => {
 
     queryFn: async () => {
       const res = await axiosSecure(`/classes?email=${user?.email}`);
-      console.log("res from Axios", res);
+      // console.log("res from Axios", res);
       return res.data;
     },
   });

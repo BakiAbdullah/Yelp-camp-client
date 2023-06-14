@@ -20,7 +20,7 @@ const useAxiosSecure = () => {
       (config) => {
         const token = localStorage.getItem("access-token");
         if (token) {
-          // token sobsomoy nao thakte pare tai check dite hbe
+          // counter Check the token
           config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
@@ -36,8 +36,8 @@ const useAxiosSecure = () => {
           error.response &&
           (error.response.status === 401 || error.response.status === 403)
         ) {
-          // await logOut();
-          // navigate("/login");
+          await logOut();
+          navigate("/login");
         }
         return Promise.reject(error);
       }

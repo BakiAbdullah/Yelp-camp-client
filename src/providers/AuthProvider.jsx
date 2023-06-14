@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   
   const [userRole, setUserRole] = useState(null);
+  console.log(userRole)
   // getting a user Role
   useEffect(() => {
     setLoading(true)

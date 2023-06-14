@@ -1,14 +1,13 @@
-
 import Avatar from "./Avatar";
 import NavBottom from "./NavBottom";
-import './Navbar.css'
+import "./Navbar.css";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "../../Button/Button";
 import { useAuth } from "../../../hooks/useAuth";
 const Navbar = () => {
-  const {user, logOut} = useAuth();
+  const { user, logOut } = useAuth();
 
   return (
     <div>
@@ -112,15 +111,13 @@ const Navbar = () => {
             {user ? (
               <>
                 <ul className="ml-auto xl:w-48 flex items-center justify-end">
-                  {/* <div className="ml-2 hidden lg:flex flex-col font-bold">
-                    <span className="text-xs text-gray-400">
-                      {user.displayName}
-                    </span>
-                  </div> */}
-                  <Link to='/dashboard'>
+                  <Link to="/dashboard/home">
                     <button className="hover:bg-white relative hover:text-darkGray shadow-sm pl-14 overflow-hidden bg-darkAmber text-white duration-300 rounded-full font-bold px-8 py-2">
                       Dashboard
-                      <span title={`${user ? user?.displayName : 'Not Found'}`} className="absolute -left-2 top-1 px-3">
+                      <span
+                        title={`${user ? user?.displayName : "Not Found"}`}
+                        className="absolute -left-2 top-1 px-3"
+                      >
                         <Avatar></Avatar>
                       </span>
                     </button>

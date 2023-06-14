@@ -95,7 +95,7 @@ const MyClasses = () => {
                     </td>
                     <td className="py-10 flex  justify-evenly items-center text-sm">
                       {/* Payment Button */}
-                      <Link to="/dashboard/payment">
+                      <Link to="/dashboard/payment/" state={singleClass.fees}>
                         <Button label={"Purchase"} fontSmall={true}></Button>
                       </Link>
 

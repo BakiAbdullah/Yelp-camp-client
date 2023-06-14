@@ -21,10 +21,6 @@ const SidebarDashboard = () => {
     setActive(!isActive);
   };
 
-  //TODO: Load data from server by Roles (Making fake AdminRoles)
-  // const isAdmin = true;
-  // const isInstructor = false;
-
    if (loading) {
      return <Loader></Loader>; // Show a loading indicator while fetching user role
    }
@@ -76,11 +72,11 @@ const SidebarDashboard = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {userRole && userRole === "admin" ? (
+              { userRole === "admin" ? (
                 <>
                   <AdminMenu></AdminMenu>
                 </>
-              ) : userRole && userRole === "instructor" ? (
+              ) : userRole === "instructor" ? (
                 <InstructorMenu></InstructorMenu>
               ) : (
                 <StudentMenu></StudentMenu>
