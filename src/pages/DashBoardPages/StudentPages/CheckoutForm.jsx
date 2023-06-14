@@ -5,6 +5,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loader from "../../../components/Shared/Loader/Loader";
 import { toast } from "react-hot-toast";
+import { ImSpinner } from "react-icons/im";
 
 const CheckoutForm = ({classes, fees }) => {
   const stripe = useStripe();
@@ -91,6 +92,7 @@ const CheckoutForm = ({classes, fees }) => {
          console.log(res.data);
          if (res.data.modifiedCount) {
            toast.success("Payment Successfull!");
+           setProcessing(false)
          }
        });
     }
@@ -120,7 +122,11 @@ const CheckoutForm = ({classes, fees }) => {
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >
-          Pay
+          {processing ? (
+            <ImSpinner className="animate-spin m-auto" size={24} />
+          ) : (
+            "Pay"
+          )}
         </button>
       </form>
       {cardError && <p className="text-red-500 font-semibold">{cardError}</p>}

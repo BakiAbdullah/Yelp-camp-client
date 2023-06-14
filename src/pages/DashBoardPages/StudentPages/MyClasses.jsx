@@ -8,7 +8,7 @@ import SubHeading from "../../../components/MainHeading/SubHeading";
 
 const MyClasses = () => {
   const [classes, refetch] = useClass();
-  // console.log(classes);
+  
 
   const handleDelete = (item) => {
     fetch(`${import.meta.env.VITE_API_URL}/class/${item._id}`, {
@@ -22,6 +22,7 @@ const MyClasses = () => {
         }
       });
   };
+  
   return (
     <>
       <Helmet>
