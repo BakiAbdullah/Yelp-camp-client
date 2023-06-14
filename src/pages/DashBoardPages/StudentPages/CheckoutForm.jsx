@@ -15,23 +15,11 @@ const CheckoutForm = ({classes, fees }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
-  console.log(classes)
-
-  // useEffect(() => {
-  // Create PaymentIntent as soon as the page loads
-  //   fetch("/create-payment-intent", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setClientSecret(data.clientSecret));
-  // }, []);
 
   useEffect(() => {
     if (fees > 0) {
       axiosSecure.post("/create-payment-intent", { fees }).then((res) => {
-        console.log(res.data.clientSecret);
+        // console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
     }
@@ -92,19 +80,19 @@ const CheckoutForm = ({classes, fees }) => {
         transactionId: paymentIntent.id,
         fees,
         date: new Date(),
-        classId: classes._id,
-        status: "service pending",
+        status: "Paid",
         class_name: classes.class_name,
         available_seats: classes.available_seats,
         instructor_name: classes.instructor_name,
+        instructor_email: classes.instructor_email
       };
-      axiosSecure.post("/payments", payment).then((res) => {
-        setProcessing(true)
-        console.log(res.data);
-        if (res.data.insertedId) {
-          toast.success("Payment Success!");
-        }
-      });
+       axiosSecure.patch("/selectedClass", payment).then((res) => {
+         setProcessing(true);
+         console.log(res.data);
+         if (res.data.modifiedCount) {
+           toast.success("Payment Successfull!");
+         }
+       });
     }
   };
 

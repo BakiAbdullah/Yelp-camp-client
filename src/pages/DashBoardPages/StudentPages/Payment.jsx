@@ -12,7 +12,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
   const location = useLocation();
   const singleClass = location.state;
-  console.log(singleClass)
   const newFee = parseFloat((singleClass.fees).toFixed(2));
   console.log(newFee);
 

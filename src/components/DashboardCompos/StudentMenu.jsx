@@ -67,19 +67,18 @@ const StudentMenu = () => {
         <span className="mx-4 font-medium">Payment History</span>
       </NavLink>
 
-      {!role && (
-        <div className="flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform text-gray-600  hover:bg-gray-300   hover:text-gray-700 cursor-pointer">
-          <MdLibraryAddCheck className="w-5 h-5 text-darkGray" />
+      <NavLink
+        to="/dashboard/myenrolledclass"
+        className={({ isActive }) =>
+          `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
+            isActive ? "bg-gray  text-gray-700" : "text-gray-600"
+          }`
+        }
+      >
+        <MdLibraryAddCheck className="w-5 h-5 text-darkGray" />
 
-          <span className="mx-4 font-medium">My Enrolled Class</span>
-        </div>
-      )}
-      {/* <HostRequestModal
-        email={user?.email}
-        modalHandler={modalHandler}
-        isOpen={modal}
-        closeModal={closeModal}
-      ></HostRequestModal> */}
+        <span className="mx-4 font-medium">My Enrolled Class</span>
+      </NavLink>
     </>
   );
 };

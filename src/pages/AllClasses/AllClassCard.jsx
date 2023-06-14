@@ -19,9 +19,12 @@ const AllClassCard = ({ singleClass }) => {
     class_name,
     class_details,
     instructor_name,
+    instructor_email,
+
     available_seats,
     fees,
   } = singleClass;
+  // console.log(singleClass)
 
   // Add Item to Cart
   const handleAddClass = (singleClass) => {
@@ -34,7 +37,10 @@ const AllClassCard = ({ singleClass }) => {
         available_seats,
         class_name,
         instructor_name,
-        email: user.email,
+        instructor_email,
+
+        email: user?.email,
+        status: 'unpaid'
       };
       fetch(`${import.meta.env.VITE_API_URL}/selectedClass`, {
         method: "POST",

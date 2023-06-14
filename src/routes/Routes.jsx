@@ -17,6 +17,8 @@ import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
 import UserHome from "../pages/DashBoardPages/UserHome";
 import Payment from "../pages/DashBoardPages/StudentPages/Payment";
+import PaymentHistory from "../pages/DashBoardPages/StudentPages/PaymentHistory";
+import MyEnrolledClass from "../pages/DashBoardPages/StudentPages/MyEnrolledClass";
 
 export const router = createBrowserRouter([
   {
@@ -48,14 +50,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-        <DashboardLayout></DashboardLayout>
-    ),
+    element: <DashboardLayout></DashboardLayout>,
     children: [
       // Student Routes ========================================
       {
         path: "/dashboard/home",
-        element: <UserHome></UserHome>
+        element: <UserHome></UserHome>,
       },
       {
         path: "/dashboard/myclasses",
@@ -66,8 +66,24 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/paymenthistory",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory></PaymentHistory>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myenrolledclass",
+        element: (
+          <PrivateRoute>
+            <MyEnrolledClass></MyEnrolledClass>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/dashboard/payment",
-        element: <Payment></Payment>
+        element: <Payment></Payment>,
       },
       // Student Routes Ends ===================================
 
