@@ -2,18 +2,20 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import "./CheckoutForm.css";
 import { useAuth } from "../../../hooks/useAuth";
-// import { toast } from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loader from "../../../components/Shared/Loader/Loader";
+import { toast } from "react-hot-toast";
 
-const CheckoutForm = ({  fees }) => {
+const CheckoutForm = ({classes, fees }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
   const [cardError, setCardError] = useState("");
   const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
-  // const [processing, setProcessing] = useState(false);
-  // const [transactionId, setTransactionId] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+  console.log(classes)
 
   // useEffect(() => {
   // Create PaymentIntent as soon as the page loads
@@ -27,7 +29,6 @@ const CheckoutForm = ({  fees }) => {
   // }, []);
 
   useEffect(() => {
-    console.log(fees);
     if (fees > 0) {
       axiosSecure.post("/create-payment-intent", { fees }).then((res) => {
         console.log(res.data.clientSecret);
@@ -47,23 +48,24 @@ const CheckoutForm = ({  fees }) => {
     if (card === null) {
       return;
     }
-    console.log('Stripe card', card)
+    console.log("Stripe card", card);
 
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
-
     if (error) {
       console.log("Stripe errror", error);
       setCardError(error.message);
     } else {
       setCardError("");
-      console.log("payment Method", paymentMethod);
+      console.log("My payment Method", paymentMethod);
     }
-
-    // setProcessing(true);
+    setProcessing(true);
+    if (processing) {
+      return <Loader></Loader>;
+    }
 
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -75,37 +77,35 @@ const CheckoutForm = ({  fees }) => {
           },
         },
       });
-
     if (confirmError) {
       console.log(confirmError);
     }
-
-    console.log("payment Intent", paymentIntent);
-    // setProcessing(false);
-    /* if (paymentIntent.status === "succeeded") {
+    console.log("My payment Intent", paymentIntent);
+    setProcessing(false);
+    if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
+      //TODO: NEXT STEP:
+
       // Save Payment Information to the server
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
-        price: fees,
+        fees,
         date: new Date(),
-        quantity: cart.length,
-        cartItems: cart.map((item) => item._id),
-        menuItems: cart.map((item) => item.menuItemId),
+        classId: classes._id,
         status: "service pending",
-        itemNames: cart.map((item) => item.name),
+        class_name: classes.class_name,
+        available_seats: classes.available_seats,
+        instructor_name: classes.instructor_name,
       };
-
       axiosSecure.post("/payments", payment).then((res) => {
+        setProcessing(true)
         console.log(res.data);
         if (res.data.insertedId) {
-          // display
           toast.success("Payment Success!");
-          // refetch();
         }
       });
-    } */
+    }
   };
 
   return (
@@ -128,19 +128,19 @@ const CheckoutForm = ({  fees }) => {
           }}
         />
         <button
-          className="shadow-sm bg-darkAmber hover:bg-white hover:text-darkGray cursor-pointer text-white duration-300 rounded-3xl font-bold text-sm px-6 py-2"
+          className="shadow-sm bg-darkAmber hover:bg-white hover:text-darkGray cursor-pointer text-white duration-300 rounded-md font-bold text-sm px-6 py-2"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || processing}
         >
           Pay
         </button>
       </form>
       {cardError && <p className="text-red-500 font-semibold">{cardError}</p>}
-      {/* {transactionId && (
-        <p className="text-green-500">
-          Your Transaction completed with transactionId: {transactionId}
+      {transactionId && (
+        <p className="text-green-500 text-center">
+          Your Transaction completed with <br /> TransactionId: {transactionId}
         </p>
-      )} */}
+      )}
     </>
   );
 };

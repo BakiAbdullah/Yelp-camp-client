@@ -11,15 +11,16 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
 const Payment = () => {
   const location = useLocation();
-  const classFees = location.state;
-  const newFee = parseFloat(classFees.toFixed(2));
+  const singleClass = location.state;
+  console.log(singleClass)
+  const newFee = parseFloat((singleClass.fees).toFixed(2));
   console.log(newFee);
 
   return (
     <div className="min-h-screen flex flex-col lg:mt-32 items-center">
       <SubHeading title={"Payment"}></SubHeading>
       <Elements stripe={stripePromise}>
-        <CheckoutForm fees={newFee}></CheckoutForm>
+        <CheckoutForm fees={newFee} classes={singleClass}></CheckoutForm>
       </Elements>
     </div>
   );

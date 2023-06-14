@@ -8,7 +8,7 @@ import SubHeading from "../../../components/MainHeading/SubHeading";
 
 const MyClasses = () => {
   const [classes, refetch] = useClass();
-  console.log(classes);
+  // console.log(classes);
 
   const handleDelete = (item) => {
     fetch(`${import.meta.env.VITE_API_URL}/class/${item._id}`, {
@@ -95,7 +95,7 @@ const MyClasses = () => {
                     </td>
                     <td className="py-10 flex  justify-evenly items-center text-sm">
                       {/* Payment Button */}
-                      <Link to="/dashboard/payment/" state={singleClass.fees}>
+                      <Link to="/dashboard/payment/" state={singleClass}>
                         <Button label={"Purchase"} fontSmall={true}></Button>
                       </Link>
 

@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
 
   // Step:3
   useEffect(() => {
-    //**** */ 1. Intercept Requests (Client ------> server) N:B: config er jaigay jekono nam deya jay
+    //** */ 1. Intercept Requests (Client ------> server) ==>
     axiosSecure.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem("access-token");
@@ -28,7 +28,7 @@ const useAxiosSecure = () => {
       (error) => Promise.reject(error)
     );
 
-    //** */ 2. Intercept Response (Client <------ Server  )
+    //** */ 2. Intercept Response (Client <------ Server  ) <==
     axiosSecure.interceptors.response.use(
       (response) => response,
       async (error) => {
