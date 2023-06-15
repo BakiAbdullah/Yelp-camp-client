@@ -17,6 +17,7 @@ const PopupLogin = () => {
         console.log(result);
         // TODO: save user to db by using custom hook fetch
         saveUser(result.user);
+        setLoading(false);
         navigate(from, { replace: true });
       })
       .catch((err) => {

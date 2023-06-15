@@ -32,6 +32,7 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         toast.success('Login Succes!')
+        setLoading(false);
         console.log(result.user);
         navigate(from, { replace: true });
       })
